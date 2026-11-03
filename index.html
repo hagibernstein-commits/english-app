@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>אנגלית בצעדים קטנים</title>
+<meta name="description" content="קורס לימוד אנגלית למתחילים, בעברית - מילים, משפטים, האזנה ומבחנים" />
+<meta name="theme-color" content="#0e7c6b" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="אנגלית בצעדים קטנים" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="icon-192.png" />
+<style>
+:root {
+    --ds-page: #f6f1ea; --ds-ink: #2e2b26; --ds-ink-2: #57534a; --ds-ink-3: #8b857a; --ds-ink-4: #c7c1b6;
+    --ds-white: #ffffff; --ds-hairline: #e6e0d6; --ds-raised: #efe9e0; --ds-teal: #0e7c6b; --ds-red: #c23b2e;
+    --ds-font-display: Georgia, 'Times New Roman', serif;
+}
+html, body { margin: 0; min-height: 100%; }
+body { background: var(--ds-page); font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; }
+.eng-shell { max-width: 680px; margin: 0 auto; padding: 0 16px 48px; }
+.eng-topbar { padding: 20px 0 12px; }
+.eng-topbar h1 { font-family: var(--ds-font-display); font-weight: 400; font-size: 30px; margin: 0; color: var(--ds-ink); }
+.eng-topbar p { margin: 4px 0 0; color: var(--ds-ink-2); font-size: 15px; }
+.eng { font-size: 16px; line-height: 1.5; color: var(--ds-ink); padding-top: 8px; }
+.eng * { box-sizing: border-box; }
+.eng .en { direction: ltr; unicode-bidi: isolate; display: inline-block; text-align: left; }
+.eng button { font: inherit; color: inherit; }
+.eng-intro { color: var(--ds-ink-2); margin: 8px 0 16px; }
+.eng-note { display: block; color: var(--ds-ink-3); font-size: 14px; margin: 4px 0; }
+.eng-h { font-family: var(--ds-font-display); font-weight: 400; font-size: 26px; line-height: 1.2; margin: 12px 0 8px; }
+.eng-group { margin-top: 22px; }
+.eng-glabel { font-size: 14px; font-weight: 600; color: var(--ds-ink-3); margin: 0 0 8px; text-transform: none; }
+.eng-callout { background: #fdf3e0; border: 1px solid #ecd9a8; border-radius: 12px; padding: 12px 16px; margin: 8px 0; }
+.eng-closing { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--ds-hairline); color: var(--ds-ink-3); font-size: 13px; }
+.eng-link { background: none; border: 0; padding: 0 4px; min-height: 44px; cursor: pointer; color: var(--ds-ink-2); text-decoration: underline; text-underline-offset: 3px; font-size: 15px; }
+.eng-back { text-decoration: none; padding-inline: 0; }
+.eng-card { background: var(--ds-white); border: 1px solid var(--ds-hairline); border-radius: 12px; padding: 14px 16px; margin: 8px 0; }
+.eng-card p { margin: 0 0 8px; }
+.eng-tip { background: var(--ds-raised); border-color: transparent; }
+.eng-row-btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+.file-button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; border-radius: 12px; border: 0; font-size: 16px; font-weight: 600; cursor: pointer; background: var(--ds-raised); color: var(--ds-ink); }
+.file-button[data-variant="primary"] { background: var(--ds-teal); color: #fff; }
+.file-button[data-variant="secondary"] { background: var(--ds-raised); color: var(--ds-ink); }
+.file-button.is-compact { min-height: 44px; }
+.file-button:disabled { opacity: 0.45; cursor: default; }
+.eng-units, .eng-steps { display: flex; flex-direction: column; gap: 8px; }
+.eng-unit, .eng-step { display: flex; gap: 12px; align-items: center; text-align: start; width: 100%; background: var(--ds-white); border: 1px solid var(--ds-hairline); border-radius: 12px; padding: 12px 14px; min-height: 64px; cursor: pointer; }
+.eng-unit.is-next { border-color: var(--ds-teal); box-shadow: inset 0 0 0 1px var(--ds-teal); }
+.eng-unit-e { font-size: 30px; flex: none; width: 40px; text-align: center; }
+.eng-unit-t, .eng-step > span:last-child { display: flex; flex-direction: column; min-width: 0; }
+.eng-step.is-test { background: var(--ds-raised); }
+.eng-check { flex: none; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--ds-ink-4); display: inline-flex; align-items: center; justify-content: center; color: var(--ds-ink-2); }
+.eng-check.is-done { background: var(--ds-teal); border-color: var(--ds-teal); color: #fff; }
+.eng-prompt { font-weight: 600; margin: 12px 0; }
+.eng-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+@media (min-width: 560px) { .eng-cards { grid-template-columns: repeat(3, 1fr); } }
+.eng-wc { background: var(--ds-white); border: 1px solid var(--ds-hairline); border-radius: 14px; padding: 12px 8px; min-height: 130px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; }
+.eng-wc.is-seen { border-color: var(--ds-teal); }
+.eng-wc-e { font-size: 38px; line-height: 1.1; }
+.eng-wc-en { font-size: 20px; font-weight: 600; }
+.eng-wc-he { color: var(--ds-ink-2); min-height: 24px; }
+.eng-wc-he.is-hid { visibility: hidden; }
+.eng-next { margin-top: 16px; display: flex; }
+.eng-next .file-button { width: 100%; min-height: 52px; }
+.eng-sents, .eng-story { display: flex; flex-direction: column; gap: 10px; }
+.eng-sent { background: var(--ds-white); border: 1px solid var(--ds-hairline); border-radius: 12px; padding: 12px 14px; }
+.eng-sent-en { font-size: 20px; font-weight: 600; }
+.eng-sent-he { color: var(--ds-ink-2); margin-top: 4px; display: block; }
+.eng-speak, .eng-bigspeak { background: var(--ds-raised); border: 0; border-radius: 999px; min-height: 44px; padding: 0 14px; cursor: pointer; }
+.eng-bigspeak { min-height: 64px; padding: 0 28px; font-size: 20px; }
+.eng-listen { display: flex; flex-direction: column; align-items: center; gap: 4px; margin: 12px 0; }
+.eng-line { display: flex; gap: 10px; align-items: flex-start; width: 100%; text-align: start; background: var(--ds-white); border: 1px solid var(--ds-hairline); border-radius: 12px; padding: 10px 12px; min-height: 52px; cursor: pointer; }
+.eng-who { flex: none; min-width: 58px; font-size: 13px; color: var(--ds-ink-3); padding-top: 3px; }
+.eng-line-t { display: flex; flex-direction: column; min-width: 0; }
+.eng-line-t .en { font-size: 18px; }
+.eng-quiz-top { display: flex; justify-content: space-between; align-items: center; }
+.eng-count { color: var(--ds-ink-3); font-size: 14px; }
+.eng-bar { height: 6px; background: var(--ds-hairline); border-radius: 3px; overflow: hidden; }
+.eng-bar span { display: block; height: 100%; background: var(--ds-teal); transition: width .2s; }
+.eng-stem { font-size: 26px; font-weight: 600; margin: 8px 0; text-align: center; display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.eng-stem.is-emoji { font-size: 72px; line-height: 1.1; }
+.eng-stem .eng-note { flex-basis: 100%; font-size: 14px; font-weight: 400; text-align: center; }
+.eng-he { text-align: center; color: var(--ds-ink-2); margin: 0 0 8px; }
+.eng-ctx { background: var(--ds-raised); border-radius: 12px; padding: 10px 14px; margin: 8px 0; display: block; width: 100%; }
+.eng-ctx p { margin: 2px 0; }
+.eng-opts { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 12px; }
+.eng-opts.is-big { grid-template-columns: repeat(2, 1fr); }
+.eng-opt { background: var(--ds-white); border: 1.5px solid var(--ds-hairline); border-radius: 12px; min-height: 52px; padding: 10px 14px; font-size: 18px; cursor: pointer; text-align: center; }
+.eng-opt.is-sel { border-color: var(--ds-ink); }
+.eng-opt.is-right { border-color: var(--ds-teal); background: #e2f2ef; }
+.eng-opt.is-wrong { border-color: var(--ds-red); background: #f9e9e7; }
+.eng-emo { font-size: 46px; line-height: 1.2; }
+.eng-order { margin-top: 12px; }
+.eng-slots { min-height: 60px; border: 1.5px dashed var(--ds-ink-4); border-radius: 12px; padding: 8px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; width: 100%; }
+.eng-pool { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; width: 100%; }
+.eng-tile { min-height: 48px; padding: 0 14px; border-radius: 10px; border: 1.5px solid var(--ds-ink-4); background: var(--ds-white); font-size: 18px; cursor: pointer; }
+.eng-tile.is-in { border-color: var(--ds-ink); }
+.eng-tile.is-ghost { border-style: dashed; color: transparent; display: inline-flex; align-items: center; }
+.eng-hint { color: var(--ds-ink-3); }
+.eng-fb { border-radius: 12px; padding: 10px 14px; margin-top: 12px; }
+.eng-fb.is-ok { background: #dcf0ec; }
+.eng-fb.is-no { background: var(--ds-raised); }
+.eng-score { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 20px; }
+.eng-big { font-family: var(--ds-font-display); font-size: 48px; line-height: 1; }
+.eng-mist { background: var(--ds-white); border: 1px solid var(--ds-hairline); border-radius: 12px; padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; }
+.eng-badge { display: inline-block; padding: 6px 14px; border-radius: 999px; font-weight: 600; margin: 8px 0; }
+.eng-skills { display: flex; flex-direction: column; gap: 10px; margin: 10px 0; }
+.eng-skill { display: grid; grid-template-columns: 96px 1fr 62px; gap: 10px; align-items: center; }
+.eng-skill-b { height: 10px; background: var(--ds-hairline); border-radius: 5px; overflow: hidden; display: block; }
+.eng-skill-b span { display: block; height: 100%; }
+.eng-skill-v { font-size: 14px; color: var(--ds-ink-2); text-align: end; }
+.is-good { background: var(--ds-teal); color: #fff; }
+.is-mid { background: #e5c97a; color: var(--ds-ink); }
+.is-low { background: #d9a09a; color: var(--ds-ink); }
+.eng-skill-b .is-mid, .eng-skill-b .is-low { color: transparent; }
+.eng-table { display: flex; flex-direction: column; gap: 8px; }
+.eng-trow { background: var(--ds-white); border: 1px solid var(--ds-hairline); border-radius: 12px; padding: 10px 14px; }
+.eng-trow-h { display: flex; justify-content: space-between; gap: 8px; align-items: center; flex-wrap: wrap; }
+.eng-pill { font-size: 13px; padding: 2px 10px; border-radius: 999px; font-weight: 600; }
+.eng-weak { display: flex; flex-wrap: wrap; gap: 8px; }
+.eng-chip { background: var(--ds-raised); border-radius: 999px; padding: 6px 12px; font-size: 15px; }
+.eng-method p { margin-bottom: 10px; }
+.eng-hero { display: block; width: 100%; max-height: 240px; object-fit: cover; object-position: center 35%; border-radius: 14px; }
+.eng-unit-t .en { align-self: flex-start; }
+.eng-reset { border-color: #e3b8b3; }
+.eng-btn-danger { background: var(--ds-red); color: #fff; border: 0; }
+.eng-btn-danger:active { filter: brightness(0.9); }
+#app-top { scroll-margin-top: 16px; }
+@media (display-mode: standalone) { .eng-topbar { padding-top: 12px; } }
+
+</style>
+</head>
+<body>
+<div class="eng-shell">
+<div class="eng-topbar"><h1>אנגלית בצעדים קטנים</h1><p>קורס לימוד אנגלית למתחילים, בעברית</p></div>
+<div dir="rtl" class="eng" lang="he"><div id="app-top" aria-hidden="true"></div><div id="app"><p class="eng-note">טוען...</p></div>
+<div class="eng-closing">ההתקדמות נשמרת רק במכשיר הזה. באפליקציה אין הרשמה ולא נאספים פרטים אישיים.</div></div>
+</div>
+<script>
+const W = (en, he, e) => ({ en, he, e });
+const S = (en, he, gap) => ({ en, he, gap });
+const L = (who, en, he) => ({ who, en, he });
+const Q = (q, he, opts, a) => ({ q, he, opts, a });
+
+const UNITS = [
+    { id: 1, level: 1, e: '👋', he: 'שלום!', en: 'Hello!',
+      tip: 'I am = אני. My name is = קוראים לי (השם שלי הוא). משפט באנגלית תמיד מתחיל באות גדולה.',
+      words: [W('hello', 'שלום', '👋'), W('goodbye', 'להתראות', '🚪'), W('yes', 'כן', '✅'), W('no', 'לא', '❌'), W('thank you', 'תודה', '🙏'), W('please', 'בבקשה', '🤲'), W('boy', 'ילד', '👦'), W('girl', 'ילדה', '👧'), W('name', 'שם', '🏷️'), W('one', 'אחד', '1️⃣'), W('two', 'שניים', '2️⃣'), W('three', 'שלושה', '3️⃣')],
+      sents: [S('Hello! My name is Dan.', 'שלום! קוראים לי דן.', 'name'), S('I am a boy.', 'אני ילד.', 'boy'), S('Thank you, goodbye!', 'תודה, להתראות!', 'goodbye'), S('Yes, please.', 'כן, בבקשה.', 'please'), S('I see three girls.', 'אני רואה שלוש ילדות.', 'three'), S('My name is Dan.', 'קוראים לי דן.', 'name')],
+      story: { title: 'שלום, דן!', lines: [L('Mia', 'Hello! My name is Mia.', 'שלום! קוראים לי מיה.'), L('Dan', 'Hello, Mia! My name is Dan.', 'שלום, מיה! קוראים לי דן.'), L('Mia', 'I am a girl. You are a boy.', 'אני ילדה. אתה ילד.'), L('Dan', 'Yes! Thank you, Mia.', 'כן! תודה, מיה.'), L('Mia', 'Goodbye, Dan!', 'להתראות, דן!')],
+        qs: [Q('What is the girl\'s name?', 'איך קוראים לילדה?', ['Mia', 'Dan', 'Tom'], 0), Q('Is Dan a boy?', 'האם דן הוא ילד?', ['Yes', 'No'], 0), Q('How does Mia end the talk?', 'במה מיה מסיימת את השיחה?', ['Goodbye', 'Please', 'No'], 0)] } },
+    { id: 2, level: 1, e: '🎨', he: 'מספרים וצבעים', en: 'Numbers and colors',
+      tip: 'המספרים באנגלית: four, five, six, seven, eight, nine, ten. הצבע בא לפני השם: a red ball (כדור אדום).',
+      words: [W('four', 'ארבעה', '4️⃣'), W('five', 'חמישה', '5️⃣'), W('six', 'שישה', '6️⃣'), W('seven', 'שבעה', '7️⃣'), W('eight', 'שמונה', '8️⃣'), W('nine', 'תשעה', '9️⃣'), W('ten', 'עשרה', '🔟'), W('red', 'אדום', '🔴'), W('blue', 'כחול', '🔵'), W('green', 'ירוק', '🟢'), W('yellow', 'צהוב', '🟡'), W('color', 'צבע', '🎨')],
+      sents: [S('I see four red balls.', 'אני רואה ארבעה כדורים אדומים.', 'four'), S('The sky is blue.', 'השמיים כחולים.', 'blue'), S('I am nine.', 'אני בן תשע.', 'nine'), S('Green is my color.', 'ירוק הוא הצבע שלי.', 'color'), S('I see a yellow bird.', 'אני רואה ציפור צהובה.', 'yellow'), S('Seven and three is ten.', 'שבע ועוד שלוש הם עשר.', 'seven')],
+      story: { title: 'הכדורים של מיה', lines: [L('Mia', 'I have five balls.', 'יש לי חמישה כדורים.'), L('Dan', 'What color are they?', 'איזה צבע הם?'), L('Mia', 'Two are red. Two are blue. One is yellow.', 'שניים אדומים, שניים כחולים, אחד צהוב.'), L('Dan', 'I see the yellow ball.', 'אני רואה את הכדור הצהוב.'), L('Mia', 'Yes! Please take it.', 'כן! בבקשה, קח אותו.')],
+        qs: [Q('How many balls does Mia have?', 'כמה כדורים יש למיה?', ['four', 'five', 'six'], 1), Q('What color is the ball Dan sees?', 'באיזה צבע הכדור שדן רואה?', ['red', 'blue', 'yellow'], 2), Q('How many balls are blue?', 'כמה כדורים כחולים?', ['one', 'two', 'five'], 1)] } },
+    { id: 3, level: 1, e: '🐶', he: 'חיות', en: 'Animals',
+      tip: 'לפני חיה אחת אומרים a: a dog (כלב), a cat (חתול). I see = אני רואה. I have = יש לי.',
+      words: [W('dog', 'כלב', '🐶'), W('cat', 'חתול', '🐱'), W('bird', 'ציפור', '🐦'), W('fish', 'דג', '🐟'), W('horse', 'סוס', '🐴'), W('cow', 'פרה', '🐮'), W('duck', 'ברווז', '🦆'), W('sheep', 'כבשה', '🐑'), W('lion', 'אריה', '🦁'), W('monkey', 'קוף', '🐵'), W('rabbit', 'ארנב', '🐰'), W('elephant', 'פיל', '🐘')],
+      sents: [S('I see a dog.', 'אני רואה כלב.', 'dog'), S('I have a cat.', 'יש לי חתול.', 'cat'), S('The lion is yellow.', 'האריה צהוב.', 'lion'), S('I see a rabbit.', 'אני רואה ארנב.', 'rabbit'), S('A cow says moo.', 'פרה אומרת מו.', 'cow'), S('I see a monkey and a horse.', 'אני רואה קוף וסוס.', 'monkey')],
+      story: { title: 'בחווה', lines: [L('Dan', 'Look! I see a horse.', 'תראי! אני רואה סוס.'), L('Mia', 'I see two cows and one sheep.', 'אני רואה שתי פרות וכבשה אחת.'), L('Dan', 'Is that a dog?', 'האם זה כלב?'), L('Mia', 'No, it is a cat!', 'לא, זה חתול!'), L('Dan', 'Hello, cat!', 'שלום, חתול!')],
+        qs: [Q('What does Dan see first?', 'מה דן רואה קודם?', ['a horse', 'a cow', 'a sheep'], 0), Q('How many cows does Mia see?', 'כמה פרות מיה רואה?', ['one', 'two', 'three'], 1), Q('Is it a dog?', 'האם זה כלב?', ['Yes, it is a dog.', 'No, it is a cat.'], 1)] } },
+    { id: 4, level: 2, e: '👨‍👩‍👧‍👦', he: 'המשפחה שלי', en: 'My family',
+      tip: 'my = שלי: my mom (אמא שלי). This is = זה/זו. I have = יש לי.',
+      words: [W('mom', 'אמא', '👩'), W('dad', 'אבא', '👨'), W('brother', 'אח', '👦🏽'), W('sister', 'אחות', '👧🏽'), W('grandma', 'סבתא', '👵'), W('grandpa', 'סבא', '👴'), W('baby', 'תינוק', '👶'), W('friend', 'חבר', '🤝'), W('family', 'משפחה', '👨‍👩‍👧‍👦'), W('home', 'בית', '🏠'), W('happy', 'שמח', '😊'), W('love', 'אוהב (אהבה)', '❤️')],
+      sents: [S('This is my mom.', 'זו אמא שלי.', 'mom'), S('I have a sister.', 'יש לי אחות.', 'sister'), S('My dad is happy.', 'אבא שלי שמח.', 'happy'), S('I love my family.', 'אני אוהב את המשפחה שלי.', 'family'), S('Grandma is at home.', 'סבתא בבית.', 'home'), S('This is my dad.', 'זה אבא שלי.', 'dad')],
+      story: { title: 'המשפחה שלי', lines: [L('Dan', 'Hello! This is my family.', 'שלום! זו המשפחה שלי.'), L('Dan', 'This is my mom and this is my dad.', 'זו אמא שלי וזה אבא שלי.'), L('Dan', 'I have a sister and a baby brother.', 'יש לי אחות ואח תינוק.'), L('Dan', 'We are at home with grandma.', 'אנחנו בבית עם סבתא.'), L('Dan', 'We are happy! I love my family.', 'אנחנו שמחים! אני אוהב את המשפחה שלי.')],
+        qs: [Q('Who is at home with the family?', 'מי בבית עם המשפחה?', ['grandma', 'grandpa', 'a friend'], 0), Q('How many sisters does Dan have?', 'כמה אחיות יש לדן?', ['one', 'two', 'three'], 0), Q('How does Dan feel?', 'איך דן מרגיש?', ['sad', 'happy', 'hungry'], 1)] } },
+    { id: 5, level: 2, e: '🍕', he: 'אוכל ושתייה', en: 'Food and drink',
+      tip: 'I like = אני אוהב. I do not like = אני לא אוהב. I want = אני רוצה. לפני תפוח אומרים an: an apple.',
+      words: [W('apple', 'תפוח', '🍎'), W('banana', 'בננה', '🍌'), W('bread', 'לחם', '🍞'), W('milk', 'חלב', '🥛'), W('water', 'מים', '💧'), W('egg', 'ביצה', '🥚'), W('cheese', 'גבינה', '🧀'), W('pizza', 'פיצה', '🍕'), W('cake', 'עוגה', '🍰'), W('juice', 'מיץ', '🧃'), W('like', 'אוהב', '👍'), W('hungry', 'רעב', '🍽️')],
+      sents: [S('I like pizza.', 'אני אוהב פיצה.', 'pizza'), S('I do not like cheese.', 'אני לא אוהב גבינה.', 'cheese'), S('I want an apple.', 'אני רוצה תפוח.', 'apple'), S('Milk and bread, please.', 'חלב ולחם, בבקשה.', 'bread'), S('I am hungry.', 'אני רעב.', 'hungry'), S('I like cake.', 'אני אוהב עוגה.', 'cake')],
+      story: { title: 'במטבח', lines: [L('Mia', 'I am hungry!', 'אני רעבה!'), L('Mom', 'Do you want bread and cheese?', 'את רוצה לחם וגבינה?'), L('Mia', 'No, thank you. I want a banana and milk.', 'לא, תודה. אני רוצה בננה וחלב.'), L('Mom', 'Here you are. And some cake?', 'בבקשה. ועוד קצת עוגה?'), L('Mia', 'Yes, please! I like cake.', 'כן, בבקשה! אני אוהבת עוגה.')],
+        qs: [Q('What does Mia want?', 'מה מיה רוצה?', ['a banana and milk', 'bread and cheese', 'pizza and juice'], 0), Q('Does Mia want bread?', 'האם מיה רוצה לחם?', ['Yes, she does.', 'No, she does not.'], 1), Q('What does Mia like?', 'מה מיה אוהבת?', ['cake', 'cheese', 'eggs'], 0)] } },
+    { id: 6, level: 3, e: '🧢', he: 'גוף ובגדים', en: 'Body and clothes',
+      tip: 'I have = יש לי. Two eyes (שתי עיניים): כשיש יותר מאחד מוסיפים s: eye - eyes, ear - ears, shoe - shoes.',
+      words: [W('head', 'ראש', '🙂'), W('eyes', 'עיניים', '👀'), W('ears', 'אוזניים', '👂'), W('nose', 'אף', '👃'), W('mouth', 'פה', '👄'), W('hand', 'יד', '✋'), W('leg', 'רגל', '🦵'), W('shirt', 'חולצה', '👕'), W('pants', 'מכנסיים', '👖'), W('shoes', 'נעליים', '👟'), W('hat', 'כובע', '🧢'), W('dress', 'שמלה', '👗')],
+      sents: [S('I have two eyes.', 'יש לי שתי עיניים.', 'eyes'), S('Touch your nose.', 'גע באף שלך.', 'nose'), S('I like my red hat.', 'אני אוהב את הכובע האדום שלי.', 'hat'), S('He has blue shoes.', 'יש לו נעליים כחולות.', 'shoes'), S('She has a green dress.', 'יש לה שמלה ירוקה.', 'dress'), S('I have two ears.', 'יש לי שתי אוזניים.', 'ears')],
+      story: { title: 'מתלבשים', lines: [L('Mom', 'Put on your shirt and pants.', 'תלבש חולצה ומכנסיים.'), L('Dan', 'OK! Where are my shoes?', 'בסדר! איפה הנעליים שלי?'), L('Mom', 'They are here. And take your hat.', 'הנה הן. וקח את הכובע שלך.'), L('Dan', 'I have my hat on my head.', 'הכובע שלי על הראש שלי.'), L('Mom', 'Great! Wave your hand.', 'כל הכבוד! נופף ביד.')],
+        qs: [Q('What does Dan ask about?', 'על מה דן שואל?', ['his shoes', 'his shirt', 'his hat'], 0), Q('Where is the hat?', 'איפה הכובע?', ['on his head', 'on the chair', 'in the bag'], 0), Q('What does Mom say to wave?', 'במה אמא אומרת לנופף?', ['your leg', 'your hand', 'your nose'], 1)] } },
+    { id: 7, level: 3, e: '🎒', he: 'בבית הספר', en: 'At school',
+      tip: 'in = בתוך, on = על, under = מתחת ל. The book is in the bag. The pen is on the chair.',
+      words: [W('book', 'ספר', '📖'), W('pen', 'עט', '🖊️'), W('pencil', 'עיפרון', '✏️'), W('bag', 'תיק', '🎒'), W('ruler', 'סרגל', '📏'), W('teacher', 'מורה', '🧑‍🏫'), W('school', 'בית ספר', '🏫'), W('chair', 'כיסא', '🪑'), W('computer', 'מחשב', '💻'), W('in', 'בתוך', '📥'), W('on', 'על', '🔝'), W('under', 'מתחת', '⬇️')],
+      sents: [S('This is my pencil.', 'זה העיפרון שלי.', 'pencil'), S('The book is in my bag.', 'הספר בתוך התיק שלי.', 'in'), S('The pen is on the chair.', 'העט על הכיסא.', 'on'), S('The bag is under the chair.', 'התיק מתחת לכיסא.', 'under'), S('My teacher is at school.', 'המורה שלי בבית הספר.', 'teacher'), S('This is my bag.', 'זה התיק שלי.', 'bag')],
+      story: { title: 'בכיתה', lines: [L('Teacher', 'Open your bag. Take your book.', 'פתחו את התיק. קחו את הספר.'), L('Mia', 'Where is my pencil?', 'איפה העיפרון שלי?'), L('Dan', 'It is under your chair.', 'הוא מתחת לכיסא שלך.'), L('Mia', 'Thank you, Dan!', 'תודה, דן!'), L('Teacher', 'Now write with your pencil.', 'עכשיו כתבו עם העיפרון.')],
+        qs: [Q('Where is Mia\'s pencil?', 'איפה העיפרון של מיה?', ['in her bag', 'on her book', 'under her chair'], 2), Q('What does the teacher say to take?', 'מה המורה אומרת לקחת?', ['the book', 'the ruler', 'the computer'], 0), Q('Who says where the pencil is?', 'מי אומר איפה העיפרון?', ['Dan', 'The teacher', 'Mom'], 0)] } },
+    { id: 8, level: 4, e: '🏊', he: 'מה אני יכול לעשות', en: 'What I can do',
+      tip: 'I can = אני יכול / יודע. I can\'t = אני לא יכול. אחרי can המילה לא משתנה: I can swim, she can swim.',
+      words: [W('run', 'לרוץ', '🏃'), W('jump', 'לקפוץ', '🤸'), W('swim', 'לשחות', '🏊'), W('read', 'לקרוא', '📚'), W('write', 'לכתוב', '✍️'), W('eat', 'לאכול', '🍴'), W('drink', 'לשתות', '🥤'), W('sleep', 'לישון', '😴'), W('play', 'לשחק', '⚽'), W('sing', 'לשיר', '🎤'), W('can', 'יכול', '💪'), W('can\'t', 'לא יכול', '🚫')],
+      sents: [S('I can swim.', 'אני יודע לשחות.', 'swim'), S('I can\'t sing.', 'אני לא יודע לשיר.', 'sing'), S('Dan can run and jump.', 'דן יודע לרוץ ולקפוץ.', 'run'), S('Mia can read a book.', 'מיה יודעת לקרוא ספר.', 'read'), S('We can play at school.', 'אנחנו יכולים לשחק בבית הספר.', 'play'), S('Can you jump?', 'האם אתה יודע לקפוץ?', 'jump')],
+      story: { title: 'מה אתה יודע לעשות?', lines: [L('Mia', 'Can you swim, Dan?', 'דן, אתה יודע לשחות?'), L('Dan', 'Yes, I can swim! I can run and jump too.', 'כן, אני יודע לשחות! אני יודע גם לרוץ ולקפוץ.'), L('Mia', 'I can\'t swim, but I can sing.', 'אני לא יודעת לשחות, אבל אני יודעת לשיר.'), L('Dan', 'Please sing for me!', 'בבקשה שירי בשבילי!'), L('Mia', 'OK! Then let us play.', 'בסדר! ואחר כך נשחק.')],
+        qs: [Q('Can Mia swim?', 'האם מיה יודעת לשחות?', ['Yes, she can.', 'No, she can\'t.'], 1), Q('What can Mia do?', 'מה מיה יודעת לעשות?', ['sing', 'jump', 'run'], 0), Q('What can Dan do?', 'מה דן יודע לעשות?', ['only sing', 'swim, run and jump', 'only sleep'], 1)] } },
+    { id: 9, level: 4, e: '🌧️', he: 'היום שלי ומזג האוויר', en: 'My day and the weather',
+      tip: 'in the morning = בבוקר, at night = בלילה. It is sunny = השמש זורחת. It is rainy = יורד גשם.',
+      words: [W('wake up', 'להתעורר', '⏰'), W('morning', 'בוקר', '🌅'), W('breakfast', 'ארוחת בוקר', '🥣'), W('lunch', 'ארוחת צהריים', '🥪'), W('dinner', 'ארוחת ערב', '🍝'), W('homework', 'שיעורי בית', '📝'), W('night', 'לילה', '🌙'), W('sunny', 'שמשי', '☀️'), W('rainy', 'גשום', '🌧️'), W('hot', 'חם', '🥵'), W('cold', 'קר', '🥶'), W('today', 'היום', '📅')],
+      sents: [S('I wake up in the morning.', 'אני מתעורר בבוקר.', 'morning'), S('I eat breakfast at home.', 'אני אוכל ארוחת בוקר בבית.', 'breakfast'), S('I do my homework.', 'אני עושה את שיעורי הבית שלי.', 'homework'), S('Today is sunny and hot.', 'היום שמשי וחם.', 'sunny'), S('I sleep at night.', 'אני ישן בלילה.', 'night'), S('It is rainy today.', 'היום גשום.', 'rainy')],
+      story: { title: 'היום שלי', lines: [L('Dan', 'I wake up in the morning.', 'אני מתעורר בבוקר.'), L('Dan', 'I eat breakfast with my family.', 'אני אוכל ארוחת בוקר עם המשפחה שלי.'), L('Dan', 'Today is rainy and cold.', 'היום גשום וקר.'), L('Dan', 'After school, I do my homework.', 'אחרי בית הספר אני עושה שיעורי בית.'), L('Dan', 'I eat dinner and I sleep at night.', 'אני אוכל ארוחת ערב וישן בלילה.')],
+        qs: [Q('What is the weather today?', 'איזה מזג אוויר היום?', ['sunny and hot', 'rainy and cold', 'sunny and cold'], 1), Q('When does Dan wake up?', 'מתי דן מתעורר?', ['in the morning', 'at night', 'after school'], 0), Q('What does Dan do after school?', 'מה דן עושה אחרי בית הספר?', ['his homework', 'his breakfast', 'his sleep'], 0)] } },
+];
+
+const SKILLS = { v: 'אוצר מילים', l: 'האזנה', g: 'משפטים', r: 'הבנת הנקרא' };
+const LEVEL_NOTES = [
+    'מתחילים מההתחלה, עם יחידה 1.',
+    'היסודות הראשונים מוכרים (שלום, מספרים, צבעים, חיות). מתחילים מיחידה 4.',
+    'המשפט הפשוט כבר מוכר (משפחה, אוכל, I like, I have). מתחילים מיחידה 6.',
+    'המילים והמשפטים הבסיסיים בטוחים (גוף, בית ספר, in/on/under). מתחילים מיחידה 8.',
+    'רמה גבוהה לתחילת הקורס. מומלץ לעבור על מבחני היחידות ולחזק את מה שפחות בטוח.',
+];
+const LEVEL_START = [1, 4, 6, 8, 9];
+
+const NEW_UNITS = [
+    { id: 10, level: 4, e: '⚽', he: 'תחביבים וספורט', en: 'Hobbies and sports',
+      tip: 'I like to = אני אוהב ל: I like to dance. אחרי like to באה מילת פעולה: like to play, like to read.',
+      words: [W('football', 'כדורגל', '⚽'), W('basketball', 'כדורסל', '🏀'), W('dance', 'לרקוד', '💃'), W('draw', 'לצייר', '🖍️'), W('ride', 'לרכב', '🚲'), W('game', 'משחק', '🎲'), W('music', 'מוזיקה', '🎵'), W('hobby', 'תחביב', '🌟'), W('team', 'קבוצה', '🧑‍🤝‍🧑'), W('win', 'לנצח', '🏆'), W('fast', 'מהר', '⚡'), W('slowly', 'לאט', '🐢')],
+      sents: [S('I play football with my friends.', 'אני משחק כדורגל עם החברים שלי.', 'football'), S('She likes to dance.', 'היא אוהבת לרקוד.', 'dance'), S('We ride bikes in the park.', 'אנחנו רוכבים על אופניים בפארק.', 'ride'), S('My team wins the game.', 'הקבוצה שלי מנצחת במשחק.', 'team'), S('I draw a big lion.', 'אני מצייר אריה גדול.', 'draw'), S('I run fast.', 'אני רץ מהר.', 'fast')],
+      story: { title: 'מה התחביב שלך?', lines: [L('Mia', 'What is your hobby, Dan?', 'מה התחביב שלך, דן?'), L('Dan', 'I like to play football. My team wins a lot!', 'אני אוהב לשחק כדורגל. הקבוצה שלי מנצחת הרבה!'), L('Mia', 'Nice! I like to draw and to dance.', 'יופי! אני אוהבת לצייר ולרקוד.'), L('Dan', 'Do you like music too?', 'גם את אוהבת מוזיקה?'), L('Mia', 'Yes! I dance to music every day.', 'כן! אני רוקדת למוזיקה כל יום.')],
+        qs: [Q('What is Dan\'s hobby?', 'מה התחביב של דן?', ['football', 'basketball', 'drawing'], 0), Q('What does Mia like to do?', 'מה מיה אוהבת לעשות?', ['to ride bikes', 'to draw and to dance', 'to run fast'], 1), Q('When does Mia dance?', 'מתי מיה רוקדת?', ['every day', 'at school', 'on Friday'], 0)] } },
+    { id: 11, level: 4, e: '🗓️', he: 'זמן וימים', en: 'Time and days',
+      tip: 'on = ביום: on Sunday (ביום ראשון). in = בחודש או בבוקר: in the morning. Yesterday = אתמול, tomorrow = מחר.',
+      words: [W('day', 'יום', '📆'), W('week', 'שבוע', '🗓️'), W('month', 'חודש', '🌙'), W('year', 'שנה', '🎂'), W('Sunday', 'יום ראשון', '🌞'), W('Friday', 'יום שישי', '🎉'), W('Saturday', 'שבת', '🕯️'), W('hour', 'שעה', '🕐'), W('late', 'מאוחר', '⏳'), W('early', 'מוקדם', '🐓'), W('now', 'עכשיו', '👇'), W('tomorrow', 'מחר', '➡️')],
+      sents: [S('Today is Sunday.', 'היום יום ראשון.', 'Sunday'), S('We go to school five days a week.', 'אנחנו הולכים לבית הספר חמישה ימים בשבוע.', 'week'), S('I get up early on Friday.', 'אני קם מוקדם ביום שישי.', 'early'), S('See you tomorrow!', 'נתראה מחר!', 'tomorrow'), S('The film is one hour long.', 'הסרט שעה אחת.', 'hour'), S('Do it now, please.', 'תעשה את זה עכשיו, בבקשה.', 'now')],
+      story: { title: 'השבוע של דן', lines: [L('Mia', 'What day is it today?', 'איזה יום היום?'), L('Dan', 'Today is Friday. Tomorrow is Saturday!', 'היום יום שישי. מחר שבת!'), L('Mia', 'Great! What do you do on Saturday?', 'נהדר! מה אתה עושה בשבת?'), L('Dan', 'I get up late and I play with my friends.', 'אני קם מאוחר ומשחק עם החברים שלי.'), L('Mia', 'And on Sunday?', 'וביום ראשון?'), L('Dan', 'On Sunday I go to school early.', 'ביום ראשון אני הולך לבית הספר מוקדם.')],
+        qs: [Q('What day is it today?', 'איזה יום היום?', ['Friday', 'Sunday', 'Saturday'], 0), Q('What does Dan do on Saturday?', 'מה דן עושה בשבת?', ['goes to school', 'gets up late and plays', 'does homework'], 1), Q('When does Dan go to school early?', 'מתי דן הולך לבית הספר מוקדם?', ['on Sunday', 'on Saturday', 'tomorrow'], 0)] } },
+    { id: 12, level: 5, e: '🏡', he: 'הבית והחדרים', en: 'Home and rooms',
+      tip: 'There is = יש (ישנו): There is a garden. Where is = איפה: Where is the kitchen?',
+      words: [W('house', 'בית', '🏡'), W('kitchen', 'מטבח', '🍳'), W('bed', 'מיטה', '🛏️'), W('sofa', 'ספה', '🛋️'), W('bath', 'אמבטיה', '🛁'), W('door', 'דלת', '🚪'), W('window', 'חלון', '🪟'), W('table', 'שולחן', '🍽️'), W('wall', 'קיר', '🧱'), W('garden', 'גינה', '🌷'), W('key', 'מפתח', '🗝️'), W('clean', 'נקי', '🧼')],
+      sents: [S('The kitchen is clean.', 'המטבח נקי.', 'kitchen'), S('My bed is big.', 'המיטה שלי גדולה.', 'bed'), S('Open the door, please.', 'פתח את הדלת, בבקשה.', 'door'), S('The window is open.', 'החלון פתוח.', 'window'), S('We eat at the table.', 'אנחנו אוכלים ליד השולחן.', 'table'), S('There is a small garden.', 'יש גינה קטנה.', 'garden')],
+      story: { title: 'סיור בבית', lines: [L('Dan', 'Welcome to my house!', 'ברוכים הבאים לבית שלי!'), L('Mia', 'Wow, it is big and clean!', 'וואו, הוא גדול ונקי!'), L('Dan', 'This is the kitchen. Mom is here.', 'זה המטבח. אמא כאן.'), L('Mia', 'And what is behind this door?', 'ומה מאחורי הדלת הזאת?'), L('Dan', 'My bedroom! My bed is next to the window.', 'חדר השינה שלי! המיטה שלי ליד החלון.'), L('Mia', 'I like your garden too.', 'גם הגינה שלך יפה.')],
+        qs: [Q('Who is in the kitchen?', 'מי במטבח?', ['Mom', 'Dad', 'Mia'], 0), Q('What is behind the door?', 'מה מאחורי הדלת?', ['the garden', 'Dan\'s bedroom', 'the sofa'], 1), Q('Where is the bed?', 'איפה המיטה?', ['next to the window', 'in the kitchen', 'behind the door'], 0)] } },
+    { id: 13, level: 5, e: '🚌', he: 'נסיעות ותחבורה', en: 'Getting around',
+      tip: 'by = ב(אמצעות): by bus (באוטובוס), by train (ברכבת). on foot = ברגל.',
+      words: [W('car', 'מכונית', '🚗'), W('bus', 'אוטובוס', '🚌'), W('train', 'רכבת', '🚆'), W('bike', 'אופניים', '🚲'), W('plane', 'מטוס', '✈️'), W('ship', 'ספינה', '🚢'), W('taxi', 'מונית', '🚕'), W('truck', 'משאית', '🚚'), W('walk', 'ללכת ברגל', '🚶'), W('drive', 'לנהוג', '🛞'), W('stop', 'תחנה', '🛑'), W('road', 'כביש', '🛣️')],
+      sents: [S('We go to school by bus.', 'אנחנו נוסעים לבית הספר באוטובוס.', 'bus'), S('My dad drives a car.', 'אבא שלי נוהג במכונית.', 'car'), S('The train is fast.', 'הרכבת מהירה.', 'train'), S('I walk to the park.', 'אני הולך ברגל לפארק.', 'walk'), S('The plane is in the sky.', 'המטוס בשמיים.', 'plane'), S('The bus stop is here.', 'תחנת האוטובוס כאן.', 'stop')],
+      story: { title: 'נוסעים לסבתא', lines: [L('Mom', 'Hurry up, Dan! The train is at nine.', 'תזדרז, דן! הרכבת בתשע.'), L('Dan', 'Are we going by train?', 'אנחנו נוסעים ברכבת?'), L('Mom', 'Yes. Grandma is waiting.', 'כן. סבתא מחכה.'), L('Dan', 'Is her house far?', 'הבית שלה רחוק?'), L('Mom', 'No. One hour on the train, and then we walk.', 'לא. שעה אחת ברכבת, ואז הולכים ברגל.'), L('Dan', 'Great! I like the train.', 'יופי! אני אוהב את הרכבת.')],
+        qs: [Q('How do they go to Grandma?', 'איך הם נוסעים לסבתא?', ['by bus', 'by train', 'by car'], 1), Q('What time is the train?', 'מתי הרכבת?', ['at nine', 'at ten', 'at eight'], 0), Q('What do they do after the train?', 'מה הם עושים אחרי הרכבת?', ['take a taxi', 'walk', 'fly'], 1)] } },
+    { id: 14, level: 5, e: '🌳', he: 'טבע', en: 'Nature',
+      tip: 'The sun = השמש. בביטויים האלה משתמשים ב-the: the sun (השמש), the moon (הירח), the sea (הים).',
+      words: [W('tree', 'עץ', '🌳'), W('flower', 'פרח', '🌸'), W('cloud', 'ענן', '☁️'), W('sea', 'ים', '🌊'), W('mountain', 'הר', '⛰️'), W('moon', 'ירח', '🌝'), W('river', 'נהר', '🏞️'), W('grass', 'דשא', '🌱'), W('snow', 'שלג', '❄️'), W('wind', 'רוח', '🍃'), W('sky', 'שמיים', '🌌'), W('star', 'כוכב', '✨')],
+      sents: [S('The sea is blue.', 'הים כחול.', 'sea'), S('There is snow on the mountain.', 'יש שלג על ההר.', 'snow'), S('The moon and the stars are in the sky.', 'הירח והכוכבים בשמיים.', 'sky'), S('A river goes to the sea.', 'נהר זורם לים.', 'river'), S('The wind is cold today.', 'הרוח קרה היום.', 'wind'), S('I see a red flower in the grass.', 'אני רואה פרח אדום בדשא.', 'flower')],
+      story: { title: 'טיול בטבע', lines: [L('Dad', 'Look, kids! A big mountain.', 'תראו, ילדים! הר גדול.'), L('Mia', 'Is there snow on it?', 'יש עליו שלג?'), L('Dad', 'Yes! And here is a river.', 'כן! ופה יש נהר.'), L('Dan', 'The river goes to the sea.', 'הנהר זורם לים.'), L('Mia', 'I want to sit on the grass and look at the clouds.', 'אני רוצה לשבת על הדשא ולהסתכל על העננים.'), L('Dad', 'Good idea. The sky is beautiful today.', 'רעיון טוב. השמיים יפים היום.')],
+        qs: [Q('What is on the mountain?', 'מה יש על ההר?', ['snow', 'grass', 'a river'], 0), Q('Where does the river go?', 'לאן הנהר זורם?', ['to the mountain', 'to the sea', 'to the sky'], 1), Q('What does Mia want to look at?', 'על מה מיה רוצה להסתכל?', ['the clouds', 'the snow', 'the sea'], 0)] } },
+    { id: 15, level: 5, e: '💗', he: 'רגשות', en: 'Feelings',
+      tip: 'I feel = אני מרגיש: I feel sick. Why are you sad? = למה אתה עצוב? Don\'t be scared = אל תפחד.',
+      words: [W('sad', 'עצוב', '😢'), W('angry', 'כועס', '😠'), W('tired', 'עייף', '😪'), W('scared', 'מפחד', '😨'), W('excited', 'נרגש', '🤩'), W('bored', 'משועמם', '🙄'), W('surprised', 'מופתע', '😲'), W('worried', 'מודאג', '😟'), W('proud', 'גאה', '😌'), W('sick', 'חולה', '🤒'), W('fine', 'בסדר', '👌'), W('feel', 'להרגיש', '💗')],
+      sents: [S('I am sad today.', 'אני עצוב היום.', 'sad'), S('She is excited about the trip.', 'היא נרגשת מהטיול.', 'excited'), S('We are tired after the game.', 'אנחנו עייפים אחרי המשחק.', 'tired'), S('I feel sick.', 'אני מרגיש חולה.', 'feel'), S('Don\'t be scared!', 'אל תפחד!', 'scared'), S('Are you OK? I am worried.', 'הכל בסדר? אני מודאג.', 'worried')],
+      story: { title: 'איפה התיק?', lines: [L('Mia', 'You look worried, Dan. What is it?', 'אתה נראה מודאג, דן. מה קרה?'), L('Dan', 'I can\'t find my bag. I am sad.', 'אני לא מוצא את התיק שלי. אני עצוב.'), L('Mia', 'Don\'t be sad! Is it under the chair?', 'אל תהיה עצוב! הוא מתחת לכיסא?'), L('Dan', 'Yes! Here it is! I am so surprised and happy!', 'כן! הנה הוא! אני כל כך מופתע ושמח!'), L('Mia', 'Great! Now I am not worried.', 'מעולה! עכשיו אני לא מודאגת.'), L('Dan', 'Thank you, Mia. I am proud of you!', 'תודה, מיה. אני גאה בך!')],
+        qs: [Q('Why is Dan sad?', 'למה דן עצוב?', ['he is sick', 'he can\'t find his bag', 'he is tired'], 1), Q('Where is the bag?', 'איפה התיק?', ['under the chair', 'at school', 'in the kitchen'], 0), Q('How does Dan feel at the end?', 'איך דן מרגיש בסוף?', ['scared', 'surprised and happy', 'angry'], 1)] } },
+    { id: 16, level: 6, e: '🛒', he: 'קניות וכסף', en: 'Shopping and money',
+      tip: 'How much? = כמה (מחיר): How much is the toy? Cheap = זול, expensive = יקר.',
+      words: [W('shop', 'חנות', '🏪'), W('money', 'כסף', '💵'), W('price', 'מחיר', '🏷️'), W('buy', 'לקנות', '🛒'), W('pay', 'לשלם', '💳'), W('cheap', 'זול', '🪙'), W('expensive', 'יקר', '💎'), W('change', 'עודף', '🔄'), W('list', 'רשימה', '📋'), W('sell', 'למכור', '💰'), W('toy', 'צעצוע', '🧸'), W('gift', 'מתנה', '🎁')],
+      sents: [S('I buy milk at the shop.', 'אני קונה חלב בחנות.', 'buy'), S('How much money do you have?', 'כמה כסף יש לך?', 'money'), S('What is the price?', 'מה המחיר?', 'price'), S('I pay for the bread.', 'אני משלם על הלחם.', 'pay'), S('The bike is expensive.', 'האופניים יקרים.', 'expensive'), S('This gift is for my mom.', 'המתנה הזאת לאמא שלי.', 'gift')],
+      story: { title: 'מתנה לאמא', lines: [L('Dan', 'I want to buy a gift for Mom.', 'אני רוצה לקנות מתנה לאמא.'), L('Mia', 'Good idea! How much money do you have?', 'רעיון טוב! כמה כסף יש לך?'), L('Dan', 'Twenty shekels. Is this toy cheap?', 'עשרים שקלים. הצעצוע הזה זול?'), L('Mia', 'No, it is expensive. Look at the price!', 'לא, הוא יקר. תסתכל על המחיר!'), L('Dan', 'Then I want to buy this flower. It is cheap and pretty.', 'אז אני קונה את הפרח הזה. הוא זול ויפה.'), L('Mia', 'Mom will be happy!', 'אמא תשמח!')],
+        qs: [Q('What does Dan want to buy?', 'מה דן רוצה לקנות?', ['a gift for Mom', 'a toy for Mia', 'bread'], 0), Q('How much money does Dan have?', 'כמה כסף יש לדן?', ['ten shekels', 'twenty shekels', 'five shekels'], 1), Q('What does Dan buy in the end?', 'מה דן קונה בסוף?', ['the toy', 'the flower', 'the bike'], 1)] } },
+    { id: 17, level: 6, e: '🍽️', he: 'במסעדה', en: 'At the restaurant',
+      tip: 'Can I have...? = אפשר לקבל...? Can I have the bill, please? Enjoy your meal! = בתיאבון!',
+      words: [W('restaurant', 'מסעדה', '🍽️'), W('menu', 'תפריט', '📜'), W('waiter', 'מלצר', '🤵'), W('fork', 'מזלג', '🍴'), W('knife', 'סכין', '🔪'), W('spoon', 'כף', '🥄'), W('plate', 'צלחת', '🍛'), W('cup', 'כוס', '☕'), W('salad', 'סלט', '🥗'), W('soup', 'מרק', '🍲'), W('tasty', 'טעים', '😋'), W('bill', 'חשבון', '🧾')],
+      sents: [S('The restaurant is big.', 'המסעדה גדולה.', 'restaurant'), S('The waiter gives us the menu.', 'המלצר נותן לנו את התפריט.', 'waiter'), S('I eat soup with a spoon.', 'אני אוכל מרק עם כף.', 'spoon'), S('The salad is tasty.', 'הסלט טעים.', 'tasty'), S('Can I have the bill, please?', 'אפשר לקבל את החשבון, בבקשה?', 'bill'), S('The knife and fork are on the table.', 'הסכין והמזלג על השולחן.', 'fork')],
+      story: { title: 'ארוחה משפחתית', lines: [L('Waiter', 'Hello! Here is the menu.', 'שלום! הנה התפריט.'), L('Dad', 'Thank you. We want two soups and a salad.', 'תודה. אנחנו רוצים שני מרקים וסלט.'), L('Mia', 'Is the soup hot?', 'המרק חם?'), L('Waiter', 'Yes, it is hot and tasty.', 'כן, הוא חם וטעים.'), L('Dan', 'I eat the soup with a big spoon!', 'אני אוכל את המרק עם כף גדולה!'), L('Dad', 'Everything is tasty. Can we have the bill, please?', 'הכל טעים. אפשר לקבל את החשבון, בבקשה?')],
+        qs: [Q('What do they order?', 'מה הם מזמינים?', ['two soups and a salad', 'pizza and cake', 'only salad'], 0), Q('Is the soup hot?', 'האם המרק חם?', ['Yes, it is.', 'No, it is cold.'], 0), Q('What does Dad ask for at the end?', 'מה אבא מבקש בסוף?', ['the menu', 'the bill', 'a spoon'], 1)] } },
+    { id: 18, level: 6, e: '🧳', he: 'טיול ונסיעה', en: 'Travel',
+      tip: 'We fly = אנחנו טסים. near = קרוב ל, far from = רחוק מ: The hotel is near the sea.',
+      words: [W('trip', 'טיול', '🧭'), W('suitcase', 'מזוודה', '🧳'), W('passport', 'דרכון', '🛂'), W('ticket', 'כרטיס', '🎫'), W('hotel', 'מלון', '🏨'), W('beach', 'חוף', '🏖️'), W('map', 'מפה', '🗺️'), W('camera', 'מצלמה', '📷'), W('fly', 'לעוף / לטוס', '🛫'), W('visit', 'לבקר', '🏛️'), W('far', 'רחוק', '🔭'), W('near', 'קרוב', '📍')],
+      sents: [S('We fly on a big plane.', 'אנחנו טסים במטוס גדול.', 'fly'), S('My suitcase is big.', 'המזוודה שלי גדולה.', 'suitcase'), S('I have a ticket for the train.', 'יש לי כרטיס לרכבת.', 'ticket'), S('The hotel is near the sea.', 'המלון קרוב לים.', 'near'), S('We take pictures with a camera.', 'אנחנו מצלמים תמונות עם מצלמה.', 'camera'), S('The beach is not far.', 'החוף לא רחוק.', 'far')],
+      story: { title: 'הטיול הגדול', lines: [L('Mom', 'Is your suitcase ready, Dan?', 'המזוודה שלך מוכנה, דן?'), L('Dan', 'Yes! And my camera is in my bag.', 'כן! והמצלמה שלי בתיק.'), L('Dad', 'Here are the tickets and the passports.', 'הנה הכרטיסים והדרכונים.'), L('Mia', 'Is the hotel far from the beach?', 'המלון רחוק מהחוף?'), L('Dad', 'No, it is near the sea. We can walk!', 'לא, הוא קרוב לים. אפשר ללכת ברגל!'), L('Dan', 'This trip will be great!', 'הטיול הזה יהיה נהדר!')],
+        qs: [Q('Where is Dan\'s camera?', 'איפה המצלמה של דן?', ['in his bag', 'in the suitcase', 'at the hotel'], 0), Q('What does Dad have?', 'מה יש לאבא?', ['the tickets and the passports', 'the map and the camera', 'the money'], 0), Q('Is the hotel near the sea?', 'האם המלון קרוב לים?', ['Yes, they can walk.', 'No, it is far.'], 0)] } },
+];
+
+UNITS.push(...NEW_UNITS);
+// ===== question engine (ported from v1) =====
+const shuffle = a => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+const pick = (a, n) => shuffle(a).slice(0, n);
+const wid = (u, en) => `${u}.${en}`;
+const ALL_WORDS = UNITS.flatMap(u => u.words.map(w => ({ ...w, u: u.id, id: wid(u.id, w.en) })));
+const wordById = id => ALL_WORDS.find(w => w.id === id);
+function withAns(correct, wrong) { const list = shuffle([correct, ...wrong]); return { list, ans: list.indexOf(correct) }; }
+const sameUnitWords = u => ALL_WORDS.filter(w => w.u === u);
+const abstractWords = new Set(['yes','no','thank you','please','name','color','love','like','hungry','in','on','under','can',"can't",'today','hobby','team','win','fast','slowly','day','week','month','year','Sunday','Friday','Saturday','hour','late','early','now','tomorrow','clean','walk','drive','stop','wind','sky','sad','angry','tired','scared','excited','bored','surprised','worried','proud','sick','fine','feel','price','buy','pay','cheap','expensive','change','sell','tasty','fly','visit','far','near']);
+function seePick(w, pool, n = 3) {
+    if (abstractWords.has(w.en)) { const q = hePick(w, pool, n); const {list,ans} = withAns(w.en, pick(pool.filter(x => x.en !== w.en), n).map(x => x.en)); return {...q, prompt:'איזו מילה באנגלית מתאימה לפירוש?', stem:w.he, stemKind:'he', audio:undefined, opts:list.map(t=>({t,ltr:true})),ans}; }
+    const wrong = pick(pool.filter(x => x.en !== w.en && x.e !== w.e), n);
+    const { list, ans } = withAns(w.en, wrong.map(x => x.en));
+    return { id: `sp.${w.id}`, skill: 'v', kind: 'mc', prompt: 'איזו מילה באנגלית מתאימה לתמונה?', stem: w.e, stemKind: 'emoji', opts: list.map(t => ({ t, ltr: true })), ans, wordId: w.id, unit: w.u, fix: `${w.en} = ${w.he}` };
+}
+function hePick(w, pool, n = 3) {
+    const wrong = pick(pool.filter(x => x.he !== w.he), n);
+    const { list, ans } = withAns(w.he, wrong.map(x => x.he));
+    return { id: `hp.${w.id}`, skill: 'v', kind: 'mc', prompt: 'מה פירוש המילה?', stem: w.en, stemKind: 'en', audio: w.en, opts: list.map(t => ({ t })), ans, wordId: w.id, unit: w.u, fix: `${w.en} = ${w.he}` };
+}
+function listenWord(w, pool, n = 3) {
+    if (abstractWords.has(w.en)) { const q=hePick(w,pool,n); return {...q,id:`lw.${w.id}`,skill:'l',prompt:'הקשיבו ובחרו את הפירוש המתאים.',stem:undefined}; }
+    const wrong = pick(pool.filter(x => x.en !== w.en && x.e !== w.e), n);
+    const { list, ans } = withAns(w.e, wrong.map(x => x.e));
+    return { id: `lw.${w.id}`, skill: 'l', kind: 'mc', prompt: 'הקשיבו ובחרו את התמונה המתאימה.', audio: w.en, opts: list.map(t => ({ t, big: true })), ans, wordId: w.id, unit: w.u, fix: `${w.en} = ${w.he}` };
+}
+function listenSent(u, i) {
+    const s = u.sents[i];
+    const wrong = pick(u.sents.filter((_, j) => j !== i && u.sents[j].he !== s.he && !u.sents[j].he.includes(s.he) && !s.he.includes(u.sents[j].he)), 2);
+    const { list, ans } = withAns(s.he, wrong.map(x => x.he));
+    return { id: `ls.${u.id}.${i}`, skill: 'l', kind: 'mc', prompt: 'הקשיבו למשפט ובחרו את התרגום הנכון.', audio: s.en, opts: list.map(t => ({ t })), ans, unit: u.id, fix: `${s.en} = ${s.he}` };
+}
+function fillQ(u, i) {
+    const s = u.sents[i];
+    const gapW = u.words.find(w => w.en === s.gap);
+    const blanked = s.en.replace(new RegExp(`\\b${s.gap}\\b`, 'i'), '_____');
+    const wrong = pick(u.words.filter(w => w.en !== s.gap), 2);
+    const { list, ans } = withAns(gapW.en, wrong.map(x => x.en));
+    return { id: `fq.${u.id}.${i}`, skill: 'g', kind: 'mc', prompt: 'השלימו את המשפט. התרגום יעזור לבחור.', stem: blanked, stemKind: 'blank', stemHe: s.he, opts: list.map(t => ({ t, ltr: true })), ans, wordId: wid(u.id, gapW.en), unit: u.id, fix: `${s.en} (${s.he})` };
+}
+function orderQ(u, i) {
+    const s = u.sents[i];
+    const target = s.en.split(' ');
+    let tiles = shuffle(target);
+    if (target.length > 1) { let g = 0; while (tiles.join(' ') === target.join(' ') && g++ < 10) tiles = shuffle(target); }
+    return { id: `oq.${u.id}.${i}`, skill: 'g', kind: 'order', prompt: 'סדרו את המילים למשפט באנגלית.', stemHe: s.he, tiles, target, audio: s.en, unit: u.id, fix: `${s.en} (${s.he})` };
+}
+function storyQs(u) {
+    return u.story.qs.map((q, i) => ({ id: `rq.${u.id}.${i}`, skill: 'r', kind: 'mc', prompt: q.he, stem: q.q, stemKind: 'en', ctx: u.story.lines.map(l => `${l.who}: ${l.en}`), opts: q.opts.map(t => ({ t, ltr: true })), ans: q.a, unit: u.id, fix: `${q.q} - ${q.opts[q.a]}` }));
+}
+const shortOrder = u => u.sents.map((s, i) => ({ s, i })).filter(x => x.s.en.split(' ').length <= 6 && x.s.en.split(' ').length >= 3).map(x => x.i);
+function practiceSet(u) {
+    const pool = sameUnitWords(u.id);
+    const ws = shuffle(pool);
+    const qs = [];
+    ws.slice(0, 4).forEach(w => qs.push(seePick(w, pool)));
+    ws.slice(4, 6).forEach(w => qs.push(hePick(w, pool)));
+    ws.slice(6, 9).forEach(w => qs.push(listenWord(w, pool)));
+    const ids = shuffle(u.sents.map((_, i) => i));
+    qs.push(listenSent(u, ids[0]));
+    ids.slice(0, 3).forEach(i => qs.push(fillQ(u, i)));
+    qs.push(orderQ(u, pick(shortOrder(u), 1)[0]));
+    return shuffle(qs);
+}
+function testSet(u) {
+    const pool = sameUnitWords(u.id);
+    const ws = shuffle(pool);
+    const ids = shuffle(u.sents.map((_, i) => i));
+    const qs = [];
+    qs.push(seePick(ws[0], pool), seePick(ws[1], pool), hePick(ws[2], pool), hePick(ws[3], pool));
+    qs.push(listenWord(ws[4], pool), listenWord(ws[5], pool), listenSent(u, ids[0]));
+    qs.push(fillQ(u, ids[1]), fillQ(u, ids[2]), orderQ(u, pick(shortOrder(u), 1)[0]));
+    qs.push(...pick(storyQs(u), 2));
+    const rank = { v: 0, l: 1, g: 2, r: 3 };
+    return qs.sort((a, b) => rank[a.skill] - rank[b.skill]);
+}
+function reviewSet(ids) {
+    const qs = [];
+    pick(ids, 10).forEach((id, i) => {
+        const w = wordById(id); if (!w) return;
+        const pool = ALL_WORDS.filter(x => x.u === w.u || Math.abs(x.u - w.u) <= 1);
+        qs.push([seePick, hePick, listenWord][i % 3](w, pool));
+    });
+    return qs;
+}
+const mc = (id, level, skill, prompt, opts, ans, o = {}) => {
+    const { ltr, big, ...rest } = o;
+    return { id, level, skill, kind: 'mc', prompt, opts: opts.map(t => ({ t, ltr, big })), ans, ...rest };
+};
+const PLACEMENT = [
+    mc('p1', 1, 'v', 'איזו מילה מתאימה לתמונה?', ['cat', 'dog', 'cow', 'hat'], 0, { stem: '🐱', stemKind: 'emoji', ltr: true }),
+    mc('p2', 1, 'v', 'מה פירוש המילה?', ['שלום', 'תודה', 'להתראות', 'כן'], 0, { stem: 'Hello', stemKind: 'en', audio: 'Hello' }),
+    mc('p3', 1, 'l', 'הקשיבו ובחרו את הצבע.', ['🔴', '🔵', '🟢', '🟡'], 1, { audio: 'blue', big: true }),
+    mc('p4', 1, 'v', 'איזה מספר זה?', ['2', '3', '5', '7'], 1, { stem: 'three', stemKind: 'en', audio: 'three' }),
+    mc('p5', 1, 'g', 'השלימו: אני ילד.', ['am', 'is', 'are'], 0, { stem: 'I _____ a boy.', stemKind: 'blank', ltr: true }),
+    mc('p6', 2, 'v', 'מה פירוש המילה?', ['אמא', 'אבא', 'אחות', 'סבתא'], 0, { stem: 'mother', stemKind: 'en', audio: 'mother' }),
+    mc('p7', 2, 'g', 'השלימו: אני אוהב פיצה.', ['like', 'am', 'can'], 0, { stem: 'I _____ pizza.', stemKind: 'blank', ltr: true }),
+    mc('p8', 2, 'l', 'הקשיבו ובחרו את התרגום.', ['זה אח שלי', 'זו אחותי', 'זה אבא שלי', 'זו סבתא שלי'], 0, { audio: 'This is my brother.' }),
+    mc('p9', 2, 'v', 'איזו תמונה מתאימה ל-water?', ['💧', '🍎', '🍞', '🥛'], 0, { stem: 'water', stemKind: 'en', audio: 'water', big: true }),
+    mc('p10', 2, 'g', 'השלימו: יש לי כלב.', ['have', 'has', 'am'], 0, { stem: 'I _____ a dog.', stemKind: 'blank', ltr: true }),
+    mc('p11', 3, 'r', 'קראו וענו: איפה התיק?', ['on the chair', 'under the table', 'in the car'], 0, { stem: 'Where is the bag?', stemKind: 'en', ctx: ['Dan has a red bag.', 'The bag is on his chair.'], ltr: true }),
+    mc('p12', 3, 'g', 'השלימו: הספר בתוך התיק.', ['in', 'on', 'under'], 0, { stem: 'The book is _____ the bag.', stemKind: 'blank', ltr: true }),
+    mc('p13', 3, 'l', 'הקשיבו ובחרו את התרגום.', ['יש לי שתי עיניים', 'יש לי שתי אוזניים', 'יש לי כובע אדום', 'יש לי אחות'], 0, { audio: 'I have two eyes.' }),
+    mc('p14', 3, 'g', 'השלימו: זה העיפרון שלי.', ['my', 'me', 'I'], 0, { stem: 'This is _____ pencil.', stemKind: 'blank', ltr: true }),
+    mc('p15', 3, 'v', 'מה פירוש המילה?', ['מורה', 'תלמיד', 'ספר', 'כיסא'], 0, { stem: 'teacher', stemKind: 'en', audio: 'teacher' }),
+    mc('p16', 4, 'r', 'קראו וענו: מה טום עושה אחרי בית הספר?', ['his homework', 'his breakfast', 'his swimming'], 0, { stem: 'What does Tom do after school?', stemKind: 'en', ctx: ['Tom wakes up in the morning.', 'He eats breakfast and goes to school.', 'After school he does his homework.'], ltr: true }),
+    mc('p17', 4, 'g', 'השלימו: היא קוראת ספר עכשיו.', ['reading', 'read', 'reads'], 0, { stem: 'She is _____ a book now.', stemKind: 'blank', ltr: true }),
+    mc('p18', 4, 'g', 'השלימו: הוא לא יכול לשחות.', ["can't", "don't", "isn't"], 0, { stem: "He _____ swim.", stemKind: 'blank', ltr: true }),
+    mc('p19', 4, 'l', 'הקשיבו ובחרו את התרגום.', ['אני אוכל ארוחת בוקר בבוקר', 'אני אוכל ארוחת ערב בלילה', 'אני ישן בבוקר', 'אני עושה שיעורי בית'], 0, { audio: 'I eat breakfast in the morning.' }),
+    mc('p20', 4, 'g', 'השלימו: יורד גשם.', ['rainy', 'sunny', 'hot'], 0, { stem: '☔ It is _____ today.', stemKind: 'blank', ltr: true }),
+];
+function placementSet() {
+    return PLACEMENT.map(q => {
+        const correct = q.opts[q.ans];
+        const o = shuffle(q.opts);
+        return { ...q, opts: o, ans: o.indexOf(correct) };
+    });
+}
+function scoreSkills(rs) {
+    const o = { v: [0, 0], l: [0, 0], g: [0, 0], r: [0, 0] };
+    rs.filter(r => !r.retry).forEach(r => { o[r.q.skill][1]++; if (r.ok) o[r.q.skill][0]++; });
+    return o;
+}
+function placementLevel(rs) {
+    const by = [[0, 0], [0, 0], [0, 0], [0, 0]];
+    rs.forEach(r => { const l = (r.q.level || 1) - 1; by[l][1]++; if (r.ok) by[l][0]++; });
+    let level = 0;
+    for (let i = 0; i < 4; i++) { if (by[i][1] > 0 && by[i][0] >= 4) level = i + 1; else break; }
+    return { level, by };
+}
+
+// ===== speech (ported from v1) =====
+const synth = ('speechSynthesis' in window && typeof SpeechSynthesisUtterance !== 'undefined') ? window.speechSynthesis : null;
+function bestVoice() {
+    if (!synth) return undefined;
+    const vs = synth.getVoices().filter(v => /^en/i.test(v.lang));
+    return vs.find(v => /en[-_]US/i.test(v.lang) && /(samantha|google us|aria|jenny|zira|natural)/i.test(v.name)) || vs.find(v => /en[-_]US/i.test(v.lang)) || vs.find(v => /en[-_]GB/i.test(v.lang)) || vs[0];
+}
+function speak(text, rate = 0.8) {
+    if (!synth) return;
+    try {
+        synth.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US'; u.rate = rate; u.pitch = 1;
+        const v = bestVoice(); if (v) { u.voice = v; u.lang = v.lang; }
+        synth.speak(u);
+    } catch (e) { /* silent */ }
+}
+function stopSpeaking() { try { synth && synth.cancel(); } catch (e) { /* silent */ } }
+const ttsState = { supported: !!synth, noEnglish: false };
+function checkVoices() { if (!synth) return; const all = synth.getVoices(); ttsState.noEnglish = all.length > 0 && !all.some(v => /^en/i.test(v.lang)); }
+checkVoices();
+if (synth && synth.addEventListener) synth.addEventListener('voiceschanged', checkVoices);
+
+// ===== persistence =====
+function storageWorks() { try { localStorage.setItem('english.t', '1'); localStorage.removeItem('english.t'); return true; } catch (e) { return false; } }
+const CAN_SAVE = storageWorks();
+function load(key, def) { try { const s = localStorage.getItem(key); return s ? JSON.parse(s) : def; } catch (e) { return def; } }
+function save(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) { /* silent */ } }
+let prog = load('english.progress.v1', { steps: {}, prac: {}, tests: {} });
+if (!prog.steps) prog = { steps: {}, prac: {}, tests: {} };
+let words = load('english.words.v1', {});
+const upd = fn => { prog = fn(prog); save('english.progress.v1', prog); };
+const updW = (id, ok) => {
+    if (!id) return;
+    const cur = words[id] || [0, 0, 0];
+    words = { ...words, [id]: ok ? [cur[0] + 1, cur[1], cur[2] + 1] : [cur[0], cur[1] + 1, 0] };
+    save('english.words.v1', words);
+};
+function resetAll() { prog = { steps: {}, prac: {}, tests: {} }; words = {}; save('english.progress.v1', prog); save('english.words.v1', words); }
+
+// ===== helpers =====
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
+const fmt = d => new Date(d).toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric', year: '2-digit' });
+const band = p => (p >= 85 ? { t: 'שולט', c: 'is-good' } : p >= 70 ? { t: 'כמעט שם', c: 'is-mid' } : { t: 'כדאי לחזור', c: 'is-low' });
+const STEPS = [{ k: 1, t: 'מילים חדשות' }, { k: 2, t: 'משפטים' }, { k: 4, t: 'תרגול' }, { k: 8, t: 'סיפור קצר' }];
+const bits = n => STEPS.filter(s => n & s.k).length;
+const bestOf = (p, u) => Math.max(0, ...(p.tests[u] || []).map(a => pct(a.s, a.t)));
+function dueWords() { return Object.entries(words).filter(([, w]) => w[1] > 0 && w[2] < 2).map(([id]) => id).filter(id => wordById(id)); }
+function nextUnit() {
+    const start = (prog.placement && prog.placement.start) || 1;
+    for (let u = start; u <= UNITS.length; u++) if (bestOf(prog, u) < 70) return u;
+    for (let u = 1; u < start; u++) if (bestOf(prog, u) < 70 && !!(prog.steps[u])) return u;
+    return Math.min(start, UNITS.length);
+}
+function scrollToTop() {
+    const run = () => { try { window.scrollTo(0, 0); } catch (e) {} const el = document.getElementById('app-top'); if (el) { try { el.scrollIntoView({ block: 'start' }); } catch (e) {} } };
+    run(); try { requestAnimationFrame(run); } catch (e) {} setTimeout(run, 120);
+}
+const LEVEL_STARTX = [1, 4, 6, 8, 10];
+
+// ===== navigation =====
+let view = { n: 'home' };
+const root = () => document.getElementById('app');
+function go(v) { stopSpeaking(); quiz = null; view = v; render(); scrollToTop(); }
+function render() {
+    const v = view;
+    let html = '';
+    if (v.n === 'home') html = vHome();
+    else if (v.n === 'unit') html = vUnit(v.u);
+    else if (v.n === 'learn') html = vLearn(v.u);
+    else if (v.n === 'sents') html = vSents(v.u);
+    else if (v.n === 'story') html = vStory(v.u);
+    else if (v.n === 'test') html = vTestIntro(v.u);
+    else if (v.n === 'placement') html = vPlacementIntro();
+    else if (v.n === 'parent') html = vParent();
+    else if (v.n === 'summary') html = vSummary();
+    else if (v.n === 'placementResult') html = vPlacementResult();
+    else if (v.n === 'quiz') html = quizHtml();
+    root().innerHTML = html;
+    bind();
+    if (v.n === 'quiz') quizAfterRender();
+}
+function bind() {
+    document.querySelectorAll('[data-go]').forEach(el => el.addEventListener('click', () => go(JSON.parse(el.getAttribute('data-go')))));
+    document.querySelectorAll('[data-act]').forEach(el => el.addEventListener('click', ev => { const fn = ACT[el.getAttribute('data-act')]; if (fn) fn(el, ev); }));
+    document.querySelectorAll('[data-speak]').forEach(el => el.addEventListener('click', () => speak(el.getAttribute('data-speak'), (parseFloat(el.getAttribute('data-rate')) || 0.8))));
+}
+const ACT = {};
+
+// ===== shared pieces =====
+const backBtn = (to, label = 'חזרה') => `<button type="button" class="eng-link eng-back" data-go='${esc(JSON.stringify(to))}'>→ ${esc(label)}</button>`;
+const speakerBtn = (text, rate = 0.8, label) => ttsState.supported ? `<button type="button" class="eng-speak" data-speak="${esc(text)}" data-rate="${rate}" aria-label="${esc(label || 'השמעה')}">🔊 ${esc(label || '')}</button>` : '';
+function skillBars(sk) {
+    return `<div class="eng-skills">${Object.keys(SKILLS).map(k => {
+        const [a, b] = sk[k]; const v = pct(a, b); const bd = band(v);
+        return `<div class="eng-skill"><span class="eng-skill-n">${SKILLS[k]}</span>
+            <span class="eng-skill-b"><span class="${bd.c}" style="width:${b ? v : 0}%"></span></span>
+            <span class="eng-skill-v">${b ? `${a}/${b}` : 'לא נבדק'}</span></div>`;
+    }).join('')}</div>`;
+}
+let resetConfirm = 0;
+function resetSectionHtml() {
+    if (resetConfirm === 0) return `<div class="eng-card eng-reset">
+        <p><strong>איפוס כל ההתקדמות:</strong> מתחילים מההתחלה. מוחקים את מבחן המיון, את ציוני כל היחידות ואת המילים לחזרה. אי אפשר לשחזר אחרי המחיקה.</p>
+        <div class="eng-row-btns"><button type="button" class="file-button is-compact eng-btn-danger" data-act="resetAsk">איפוס כל ההתקדמות</button></div></div>`;
+    return `<div class="eng-card eng-reset">
+        <p><strong>בטוחים?</strong> כל ההתקדמות תימחק לצמיתות: מבחן המיון, ציוני כל היחידות והמילים לחזרה.</p>
+        <div class="eng-row-btns">
+            <button type="button" class="file-button is-compact eng-btn-danger" data-act="resetYes">כן, לאפס הכול</button>
+            <button type="button" class="file-button is-compact" data-variant="secondary" data-act="resetNo">ביטול</button></div></div>`;
+}
+ACT.resetAsk = () => { resetConfirm = 1; render(); };
+ACT.resetNo = () => { resetConfirm = 0; render(); };
+ACT.resetYes = () => { resetConfirm = 0; resetAll(); go({ n: 'home' }); };
+
+// ===== home =====
+function vHome() {
+    const due = dueWords();
+    const nu = nextUnit();
+    const msg = CAN_SAVE ? 'ההתקדמות נשמרה במכשיר הזה' : 'ההתקדמות לא נשמרה. השינויים יישארו רק כל עוד הדף פתוח.';
+    let ttsWarn = '';
+    if (!ttsState.supported) ttsWarn = `<div class="eng-callout"><strong>אין השמעת קול.</strong> הדפדפן במכשיר הזה לא תומך בהשמעת אנגלית. תרגילי ההאזנה יוצגו עם המילה בכתב. כדאי לפתוח בכרום או בספארי.</div>`;
+    else if (ttsState.noEnglish) ttsWarn = `<div class="eng-callout"><strong>אולי חסר קול באנגלית.</strong> לא נמצא קול באנגלית במכשיר. אם לא שומעים כלום, אפשר להוסיף קול באנגלית בהגדרות המכשיר (הגדרות, נגישות, הקראה).</div>`;
+    const placementCard = prog.placement ? `<div class="eng-card">
+        <p><strong>מבחן המיון:</strong> ${LEVEL_NOTES[prog.placement.level]}</p>
+        <p class="eng-note">נעשה ב-${fmt(prog.placement.d)}</p>
+        <div class="eng-row-btns"><button type="button" class="file-button is-compact" data-variant="secondary" data-go='{"n":"placement"}'>לעשות את המבחן שוב</button></div></div>`
+        : `<div class="eng-card">
+        <p>מתחילים במבחן מיון קצר (עד 20 שאלות, כ-10 דקות). הוא מראה מאיפה כדאי להתחיל. אין בו ציון עובר או נכשל, ואפשר לדלג עליו ולהתחיל מיחידה 1.</p>
+        <div class="eng-row-btns"><button type="button" class="file-button" data-variant="primary" data-go='{"n":"placement"}'>מתחילים במבחן מיון</button></div></div>`;
+    const unitsHtml = UNITS.map(u => {
+        const best = bestOf(prog, u.id); const n = bits(prog.steps[u.id] || 0); const tested = (prog.tests[u.id] || []).length;
+        return `<button type="button" class="eng-unit${nu === u.id ? ' is-next' : ''}" data-go='{"n":"unit","u":${u.id}}'>
+            <span class="eng-unit-e" aria-hidden="true">${u.e}</span>
+            <span class="eng-unit-t"><strong>יחידה ${u.id}: ${esc(u.he)}</strong><span class="en" dir="ltr">${esc(u.en)}</span>
+            <span class="eng-note">${nu === u.id ? 'הצעד הבא · ' : ''}שלבים ${n}/4 · ${tested ? `מבחן ${best}%` : 'עוד לא נבחן'}</span></span></button>`;
+    }).join('');
+    return `
+    <img class="eng-hero" src="hero.jpg" alt="כרטיסי לימוד עם חתול, תפוח ושמש" />
+    <p class="eng-intro">${UNITS.length} יחידות קצרות, צעד אחרי צעד: מילים, משפטים, האזנה, קריאה. בסוף כל יחידה יש מבחן, ובלוח ההורים רואים בדיוק מה הילד יודע.</p>
+    ${ttsWarn}
+    <div class="eng-group"><h3 class="eng-glabel">נקודת התחלה</h3>${placementCard}</div>
+    <div class="eng-group"><h3 class="eng-glabel">היחידות</h3><div class="eng-units">${unitsHtml}</div></div>
+    <div class="eng-group"><h3 class="eng-glabel">חזרה</h3><div class="eng-card">
+        ${due.length === 0 ? '<p>מילים שהיו קשות יחזרו כאן לחזרה קצרה. עדיין אין מילים לחזרה.</p>' : `<p>יש <strong>${due.length}</strong> מילים שכדאי לחזק. חזרה קצרה כל יום עוזרת לזכור.</p>`}
+        <div class="eng-row-btns"><button type="button" class="file-button is-compact" data-variant="secondary" ${due.length === 0 ? 'disabled' : ''} data-act="goReview">חזרה על מילים</button></div></div></div>
+    <div class="eng-group"><h3 class="eng-glabel">להורים</h3>
+        <div class="eng-row-btns"><button type="button" class="file-button is-compact" data-variant="secondary" data-go='{"n":"parent"}'>לוח הורים והערכה</button></div>
+        <p class="eng-note">מצב שמירה: ${msg}</p>
+        <p class="eng-note">ההתקדמות נשמרת רק בטלפון או במחשב הזה. אם מתקינים את האפליקציה במכשיר נוסף, ההתקדמות לא עוברת איתה.</p></div>
+    <div class="eng-group"><h3 class="eng-glabel">איפוס ההתקדמות</h3>${resetSectionHtml()}</div>`;
+}
+ACT.goReview = () => { const qs = reviewSet(dueWords()); startQuiz(qs, 'practice', { title: 'חזרה על מילים', onAnswer: r => updW(r.q.wordId, r.ok), onDone: rs => summaryScreen(rs, 'סיימתם את החזרה', null, () => go({ n: 'home' })), onExit: () => go({ n: 'home' }) }); };
+
+// ===== unit page =====
+function vUnit(uid) {
+    const u = UNITS[uid - 1];
+    const done = prog.steps[u.id] || 0;
+    const tests = prog.tests[u.id] || [];
+    const routes = ['learn', 'sents', 'prac', 'story'];
+    const desc = ['לראות, לשמוע ולהכיר את 12 המילים', 'משפטים קצרים עם תרגום והסבר', 'תרגול עם משוב מיידי. טעויות חוזרות', 'לשמוע ולקרוא שיחה קצרה ולענות על שאלות'];
+    const stepsHtml = STEPS.map((s, i) => `<button type="button" class="eng-step" data-act="step${i}">
+        <span class="eng-check${done & s.k ? ' is-done' : ''}" aria-hidden="true">${done & s.k ? '✓' : i + 1}</span>
+        <span><strong>${s.t}</strong><span class="eng-note">${desc[i]}</span></span></button>`).join('');
+    return `${backBtn({ n: 'home' })}
+    <h2 class="eng-h">${u.e} יחידה ${u.id}: ${esc(u.he)}</h2>
+    <p class="eng-note en" dir="ltr">${esc(u.en)}</p>
+    <div class="eng-group"><h3 class="eng-glabel">שלבים</h3>
+        <div class="eng-steps">${stepsHtml}
+        <button type="button" class="eng-step is-test" data-go='{"n":"test","u":${u.id}}'>
+            <span class="eng-check${tests.length ? ' is-done' : ''}" aria-hidden="true">${tests.length ? '✓' : '5'}</span>
+            <span><strong>מבחן יחידה</strong><span class="eng-note">12 שאלות, בלי רמזים ובלי משוב בזמן המבחן${tests.length ? ` · הציון הטוב ביותר ${bestOf(prog, u.id)}%` : ''}</span></span></button></div>
+        <p class="eng-note">כדאי לעבור את השלבים לפי הסדר, ולעשות את המבחן ביום אחר מאשר הלמידה כדי לבדוק מה באמת נשאר בזיכרון.</p></div>`;
+}
+ACT.step0 = () => go({ n: 'learn', u: view.u });
+ACT.step1 = () => go({ n: 'sents', u: view.u });
+ACT.step2 = () => { const u = UNITS[view.u - 1]; startQuiz(practiceSet(u), 'practice', { title: `תרגול · ${u.he}`, onAnswer: r => updW(r.q.wordId, r.ok), onExit: () => go({ n: 'unit', u: u.id }), onDone: rs => {
+    const f = rs.filter(r => !r.retry); const sc = pct(f.filter(r => r.ok).length, f.length);
+    upd(x => ({ ...x, steps: { ...x.steps, [u.id]: (x.steps[u.id] || 0) | 4 }, prac: { ...x.prac, [u.id]: sc } }));
+    summaryScreen(rs, 'סיימתם את התרגול', () => { view = { n: 'unit', u: u.id }; ACT.step2(); }, () => go({ n: 'unit', u: u.id }));
+} }); };
+ACT.step3 = () => go({ n: 'story', u: view.u });
+
+// ===== learn (word cards) =====
+let learnSeen = [], learnOpen = null;
+function vLearn(uid) {
+    const u = UNITS[uid - 1];
+    if (view.n === 'learn' && learnUnit !== uid) { learnSeen = []; learnOpen = null; }
+    learnUnit = uid;
+    const cards = u.words.map(w => `<button type="button" class="eng-wc${learnSeen.includes(w.en) ? ' is-seen' : ''}" data-act="tapWord" data-en="${esc(w.en)}">
+        <span class="eng-wc-e" aria-hidden="true">${w.e}</span>
+        <span class="eng-wc-en en" dir="ltr">${esc(w.en)}</span>
+        <span class="eng-wc-he${learnOpen === w.en || learnSeen.includes(w.en) ? '' : ' is-hid'}">${esc(w.he)}</span></button>`).join('');
+    const all = learnSeen.length >= u.words.length;
+    return `${backBtn({ n: 'unit', u: uid }, `יחידה ${uid}`)}
+    <h2 class="eng-h">מילים חדשות</h2>
+    <p class="eng-prompt">לחצו על כל כרטיס: תשמעו את המילה ותראו את התרגום. חזרו על המילה בקול רם.</p>
+    <div class="eng-cards">${cards}</div>
+    <p class="eng-note">${learnSeen.length} מתוך ${u.words.length} כרטיסים נפתחו</p>
+    <div class="eng-next"><button type="button" class="file-button" data-variant="primary" ${all ? '' : 'disabled'} data-act="learnDone">סיימתי, ממשיכים</button></div>`;
+}
+let learnUnit = null;
+ACT.tapWord = el => { const en = el.getAttribute('data-en'); speak(en, 0.7); learnOpen = en; if (!learnSeen.includes(en)) learnSeen.push(en); render(); };
+ACT.learnDone = () => { const uid = view.u; upd(x => ({ ...x, steps: { ...x.steps, [uid]: (x.steps[uid] || 0) | 1 } })); go({ n: 'unit', u: uid }); };
+
+// ===== sentences =====
+let sentsShow = [];
+function vSents(uid) {
+    const u = UNITS[uid - 1];
+    if (sentsUnit !== uid) { sentsShow = []; sentsUnit = uid; }
+    const rows = u.sents.map((s, i) => `<div class="eng-sent">
+        <div class="eng-sent-en en" dir="ltr">${esc(s.en)}</div>
+        <div class="eng-row-btns">${speakerBtn(s.en, 0.75, 'השמעה')}${speakerBtn(s.en, 0.45, 'לאט')}
+            <button type="button" class="eng-link" data-act="toggleSent" data-i="${i}">${sentsShow.includes(i) ? 'להסתיר תרגום' : 'תרגום'}</button></div>
+        ${sentsShow.includes(i) ? `<div class="eng-sent-he">${esc(s.he)}</div>` : ''}</div>`).join('');
+    return `${backBtn({ n: 'unit', u: uid }, `יחידה ${uid}`)}
+    <h2 class="eng-h">משפטים</h2>
+    <div class="eng-card eng-tip"><strong>כלל קטן:</strong> ${esc(u.tip)}</div>
+    <p class="eng-prompt">הקשיבו לכל משפט, אמרו אותו בקול, ורק אחר כך בדקו את התרגום.</p>
+    <div class="eng-sents">${rows}</div>
+    <div class="eng-next"><button type="button" class="file-button" data-variant="primary" data-act="sentsDone">סיימתי, ממשיכים</button></div>`;
+}
+let sentsUnit = null;
+ACT.toggleSent = el => { const i = parseInt(el.getAttribute('data-i'), 10); sentsShow = sentsShow.includes(i) ? sentsShow.filter(x => x !== i) : [...sentsShow, i]; render(); };
+ACT.sentsDone = () => { const uid = view.u; upd(x => ({ ...x, steps: { ...x.steps, [uid]: (x.steps[uid] || 0) | 2 } })); go({ n: 'unit', u: uid }); };
+
+// ===== story =====
+let storyTr = false;
+function vStory(uid) {
+    const u = UNITS[uid - 1];
+    if (storyUnit !== uid) { storyTr = false; storyUnit = uid; }
+    const lines = u.story.lines.map((l, i) => `<button type="button" class="eng-line" data-speak="${esc(l.en)}" data-rate="0.75">
+        <span class="eng-who en" dir="ltr">${esc(l.who)}</span>
+        <span class="eng-line-t"><span class="en" dir="ltr">${esc(l.en)}</span>${storyTr ? `<span class="eng-sent-he">${esc(l.he)}</span>` : ''}</span></button>`).join('');
+    return `${backBtn({ n: 'unit', u: uid }, `יחידה ${uid}`)}
+    <h2 class="eng-h">${esc(u.story.title)}</h2>
+    <p class="eng-prompt">הקשיבו לשיחה פעם אחת בלי תרגום, אחר כך קראו. לחצו על שורה כדי לשמוע אותה שוב.</p>
+    <div class="eng-row-btns">${ttsState.supported ? `<button type="button" class="file-button is-compact" data-variant="secondary" data-act="playStory">🔊 השמעת כל השיחה</button>` : ''}
+        <button type="button" class="eng-link" data-act="toggleStoryTr">${storyTr ? 'להסתיר תרגום' : 'להציג תרגום'}</button></div>
+    <div class="eng-story">${lines}</div>
+    <div class="eng-next"><button type="button" class="file-button" data-variant="primary" data-act="storyQs">לשאלות</button></div>`;
+}
+let storyUnit = null;
+ACT.playStory = () => { const u = UNITS[view.u - 1]; speak(u.story.lines.map(l => l.en).join(' '), 0.75); };
+ACT.toggleStoryTr = () => { storyTr = !storyTr; render(); };
+ACT.storyQs = () => { const u = UNITS[view.u - 1]; startQuiz(storyQs(u), 'practice', { title: 'שאלות על הסיפור', onAnswer: r => updW(undefined, r.ok), onExit: () => go({ n: 'story', u: u.id }), onDone: rs => {
+    upd(x => ({ ...x, steps: { ...x.steps, [u.id]: (x.steps[u.id] || 0) | 8 } }));
+    summaryScreen(rs, 'סיימתם את הסיפור', null, () => go({ n: 'unit', u: u.id }));
+} }); };
+
+// ===== unit test =====
+function vTestIntro(uid) {
+    return `${backBtn({ n: 'unit', u: uid }, `יחידה ${uid}`)}
+    <h2 class="eng-h">מבחן יחידה ${uid}</h2>
+    <div class="eng-card"><p>12 שאלות: אוצר מילים, האזנה, משפטים והבנת הנקרא. בלי רמזים ובלי הצגת התשובה הנכונה בזמן המבחן. בסוף רואים ציון לכל מיומנות.</p>
+        <p class="eng-note">ציון 85% ומעלה = שולט, 70% עד 84% = כמעט שם, מתחת ל-70% = כדאי לחזור על היחידה. אפשר לעשות את המבחן שוב, והשאלות משתנות.</p></div>
+    <div class="eng-next"><button type="button" class="file-button" data-variant="primary" data-act="testStart">מתחילים</button></div>`;
+}
+ACT.testStart = () => { const u = UNITS[view.u - 1]; startQuiz(testSet(u), 'test', { title: `מבחן יחידה ${u.id}`, onExit: () => go({ n: 'test', u: u.id }), onDone: rs => {
+    rs.forEach(x => updW(x.q.wordId, x.ok));
+    const sk = scoreSkills(rs); const s = rs.filter(x => x.ok).length;
+    upd(x => ({ ...x, tests: { ...x.tests, [u.id]: [...(x.tests[u.id] || []), { d: Date.now(), s, t: rs.length, sk }] } }));
+    const v = pct(s, rs.length); const bd = band(v);
+    const extra = `<div class="eng-badge ${bd.c}">${bd.t}</div>${skillBars(scoreSkills(rs))}
+        <p class="eng-note">${v >= 85 ? 'מצוין. אפשר להמשיך ליחידה הבאה.' : v >= 70 ? 'כמעט. כדאי לתרגל שוב את השלב החלש ולהמשיך.' : 'כדאי לחזור על המילים והמשפטים של היחידה, ואז לנסות את המבחן שוב.'}</p>`;
+    summaryScreen(rs, `תוצאות מבחן יחידה ${u.id}`, () => go({ n: 'test', u: u.id }), () => go({ n: 'unit', u: u.id }), extra);
+} }); };
+
+// ===== placement =====
+function vPlacementIntro() {
+    return `${backBtn({ n: 'home' })}
+    <h2 class="eng-h">מבחן מיון</h2>
+    <div class="eng-card"><p>עד 20 שאלות מהקל אל הקשה. אם יהיה קשה מדי, המבחן ייעצר מוקדם וזה בסדר גמור. אין רמזים. מדלגים על מה שלא יודעים בבחירת התשובה שנראית הכי קרובה.</p>
+        <p>כדאי להפעיל את הקול במכשיר ולשבת במקום שקט.</p></div>
+    <div class="eng-next"><button type="button" class="file-button" data-variant="primary" data-act="placementStart">מתחילים</button></div>`;
+}
+ACT.placementStart = () => { startQuiz(placementSet(), 'placement', { title: 'מבחן מיון',
+    skipRule: (r, next) => { const L = next.level || 1; if (L <= 1) return false; const lv = r.filter(x => x.q.level === L - 1); return lv.filter(x => x.ok).length < 3; },
+    onExit: () => go({ n: 'placement' }), onDone: rs => {
+        const { level, by } = placementLevel(rs);
+        upd(x => ({ ...x, placement: { d: Date.now(), level, start: LEVEL_STARTX[level], by, sk: scoreSkills(rs) } }));
+        view = { n: 'placementResult', rs, level, by }; render(); scrollToTop();
+    } }); };
+
+// ===== parent =====
+function vParent() {
+    const p = prog;
+    const agg = { v: [0, 0], l: [0, 0], g: [0, 0], r: [0, 0] };
+    Object.values(p.tests).forEach(arr => { const a = arr[arr.length - 1]; if (a) Object.keys(agg).forEach(k => { agg[k][0] += a.sk[k][0]; agg[k][1] += a.sk[k][1]; }); });
+    const weak = Object.entries(words).filter(([, w]) => w[1] > 0 && w[2] < 2).sort((a, b) => b[1][1] - a[1][1]).slice(0, 12).map(([id, w]) => ({ w: wordById(id), wrong: w[1] })).filter(x => x.w);
+    const tested = Object.keys(p.tests).length;
+    const mastered = UNITS.filter(u => bestOf(p, u.id) >= 85).length;
+    const skillsWithData = Object.keys(agg).filter(k => agg[k][1] > 0).sort((a, b) => pct(agg[a][0], agg[a][1]) - pct(agg[b][0], agg[b][1]));
+    const rec = tested === 0 ? 'עוד אין תוצאות מבחני יחידה. התחילו במבחן מיון או ביחידה 1.'
+        : `היחידה הבאה: יחידה ${nextUnit()}. ${skillsWithData.length ? `המיומנות הכי חלשה כרגע: ${SKILLS[skillsWithData[0]]} (${pct(agg[skillsWithData[0]][0], agg[skillsWithData[0]][1])}%).` : ''}${weak.length ? ` יש ${weak.length} מילים לחזרה.` : ''}`;
+    const rows = UNITS.map(u => {
+        const t = p.tests[u.id] || []; const last = t[t.length - 1]; const bst = bestOf(p, u.id); const bd = band(bst);
+        return `<div class="eng-trow">
+            <div class="eng-trow-h"><strong>${u.e} יחידה ${u.id}: ${esc(u.he)}</strong>${t.length > 0 ? `<span class="eng-pill ${bd.c}">${bd.t}</span>` : ''}</div>
+            <div class="eng-note">שלבים: ${bits(p.steps[u.id] || 0)}/4 · תרגול אחרון: ${p.prac[u.id] !== undefined ? `${p.prac[u.id]}%` : 'לא נעשה'}</div>
+            <div class="eng-note">${t.length ? `מבחן: ${t.map(a => `${pct(a.s, a.t)}%`).join(', ')} (אחרון ב-${fmt(last.d)})` : 'מבחן: עוד לא נעשה'}</div></div>`;
+    }).join('');
+    return `${backBtn({ n: 'home' })}
+    <h2 class="eng-h">לוח הורים</h2>
+    <div class="eng-card"><strong>סיכום:</strong> ${tested} יחידות נבחנו, ${mastered} ברמת שליטה (85% ומעלה).<br />${esc(rec)}</div>
+    <div class="eng-group"><h3 class="eng-glabel">מבחן מיון</h3>
+        ${p.placement ? `<div class="eng-card"><p>${fmt(p.placement.d)}: ${LEVEL_NOTES[p.placement.level]}</p>${skillBars(p.placement.sk)}</div>` : '<p class="eng-note">עוד לא נעשה מבחן מיון.</p>'}</div>
+    <div class="eng-group"><h3 class="eng-glabel">מיומנויות במבחני היחידות</h3>
+        ${skillsWithData.length ? skillBars(agg) : '<p class="eng-note">יופיעו אחרי המבחן הראשון. מוצג המבחן האחרון בכל יחידה.</p>'}</div>
+    <div class="eng-group"><h3 class="eng-glabel">יחידה אחרי יחידה</h3><div class="eng-table">${rows}</div></div>
+    <div class="eng-group"><h3 class="eng-glabel">מילים לחזרה</h3>
+        ${weak.length ? `<div class="eng-weak">${weak.map(x => `<span class="eng-chip"><span class="en" dir="ltr">${esc(x.w.en)}</span> = ${esc(x.w.he)}</span>`).join('')}</div>` : '<p class="eng-note">אין כרגע מילים שחוזרות על עצמן כטעות.</p>'}</div>
+    <div class="eng-group"><h3 class="eng-glabel">איך ההערכה עובדת</h3><div class="eng-card eng-method">
+        <p><strong>מיון:</strong> 20 שאלות בארבע רמות, מהקל לקשה. הרמה נקבעת לפי הרמה האחרונה שבה נענו נכון 4 מתוך 5. המבחן נעצר אם ברמה קיבלו פחות מ-3 מתוך 5.</p>
+        <p><strong>מבחן יחידה:</strong> 12 שאלות: 4 אוצר מילים, 3 האזנה, 3 משפטים (השלמה וסידור), 2 הבנת הנקרא. בלי רמזים. השאלות נבחרות מחדש בכל ניסיון.</p>
+        <p><strong>רמות:</strong> 85% ומעלה שולט, 70% עד 84% כמעט שם, מתחת ל-70% כדאי לחזור.</p>
+        <p><strong>חזרה:</strong> מילה שנענתה לא נכון חוזרת עד ששתי תשובות נכונות ברצף.</p>
+        <p class="eng-note">זו הערכה לימודית פשוטה של האפליקציה, לא מבחן תקני. הציונים נשמרים במכשיר בלבד.</p></div></div>
+    <div class="eng-group"><h3 class="eng-glabel">איפוס</h3>${resetSectionHtml()}</div>`;
+}
+
+// ===== summary =====
+let summaryData = null;
+function summaryScreen(rs, title, onAgain, onBack, extra) {
+    summaryData = { rs, title, onAgain, onBack, extra };
+    view = { n: 'summary' }; render(); scrollToTop();
+}
+function vSummary() {
+    const { rs, title, onAgain, extra } = summaryData;
+    const first = rs.filter(r => !r.retry); const good = first.filter(r => r.ok).length; const wrong = first.filter(r => !r.ok);
+    return `<h2 class="eng-h">${esc(title)}</h2>
+    <div class="eng-card eng-score"><span class="eng-big">${good}/${first.length}</span><span>תשובות נכונות בניסיון הראשון (${pct(good, first.length)}%)</span></div>
+    ${extra || ''}
+    ${wrong.length > 0 ? `<div class="eng-group"><h3 class="eng-glabel">כדאי לזכור</h3><div class="eng-mist">${wrong.map(r => `<div class="en" dir="ltr">${esc(r.q.fix || r.q.stem)}</div>`).join('')}</div></div>` : ''}
+    <div class="eng-row-btns">${onAgain ? '<button type="button" class="file-button is-compact" data-variant="secondary" data-act="sumAgain">עוד פעם</button>' : ''}<button type="button" class="file-button is-compact" data-variant="primary" data-act="sumBack">חזרה</button></div>`;
+}
+ACT.sumAgain = () => { if (summaryData.onAgain) summaryData.onAgain(); };
+ACT.sumBack = () => { if (summaryData.onBack) summaryData.onBack(); };
+
+// ===== placement result =====
+function vPlacementResult() {
+    const { rs, level, by } = view;
+    return `<h2 class="eng-h">תוצאות מבחן המיון</h2>
+    <div class="eng-card"><p><strong>${LEVEL_NOTES[level]}</strong></p>
+        <p class="eng-note">אפשר תמיד לבחור כל יחידה אחרת. ההמלצה היא רק נקודת התחלה.</p></div>
+    ${skillBars(scoreSkills(rs))}
+    <div class="eng-row-btns"><button type="button" class="file-button" data-variant="primary" data-go='{"n":"home"}'>לדף הראשי</button></div>
+    <p class="eng-note">ציוני הרמות: ${by.map((b, i) => b[1] ? `רמה ${i + 1}: ${b[0]}/${b[1]}` : null).filter(Boolean).join(' · ')}</p>`;
+}
+
+// ===== quiz engine =====
+let quiz = null;
+function startQuiz(qs, mode, opts) {
+    quiz = { queue: qs, i: 0, sel: null, placed: [], checked: false, rs: [], mode, skipRule: opts.skipRule || null, onDone: opts.onDone, onExit: opts.onExit, onAnswer: opts.onAnswer || null, title: opts.title || '' };
+    view = { n: 'quiz' }; render(); scrollToTop();
+}
+function quizHtml() {
+    const q = quiz.queue[quiz.i];
+    const retry = q.id.endsWith('#r');
+    const total = quiz.mode === 'placement' ? 20 : quiz.queue.filter(x => !x.id.endsWith('#r')).length;
+    const step = quiz.rs.filter(r => !r.retry).length;
+    const listening = q.skill === 'l' && q.kind === 'mc';
+    let ok = null;
+    if (quiz.checked) ok = q.kind === 'mc' ? quiz.sel === q.ans : quiz.placed.map(p => q.tiles[p]).join(' ') === q.target.join(' ');
+    const locked = quiz.mode === 'practice' && quiz.checked;
+    const answered = q.kind === 'mc' ? quiz.sel !== null : quiz.placed.length === (q.tiles || []).length;
+    let body = '';
+    if (q.ctx) body += `<div class="eng-ctx en" dir="ltr">${q.ctx.map(l => `<p>${esc(l)}</p>`).join('')}</div>`;
+    if (listening) {
+        body += `<div class="eng-listen">${ttsState.supported
+            ? `<button type="button" class="eng-bigspeak" data-act="qSpeak">🔊 השמעה</button><button type="button" class="eng-link" data-act="qSpeakSlow">🐢 לאט</button>`
+            : `<p class="en eng-stem" dir="ltr">${esc(q.audio)}<span class="eng-note he">אין השמעת קול במכשיר הזה, לכן המילים מוצגות בכתב.</span></p>`}</div>`;
+    }
+    if (q.stem) body += `<div class="eng-stem ${q.stemKind === 'emoji' ? 'is-emoji' : 'en'}" ${q.stemKind === 'emoji' ? '' : 'dir="ltr"'}>${esc(q.stem)}${q.stemKind === 'en' && q.audio ? speakerBtn(q.audio) : ''}</div>`;
+    if (q.stemHe) body += `<p class="eng-he">${esc(q.stemHe)}</p>`;
+    if (q.kind === 'mc') {
+        body += `<div class="eng-opts${q.opts.some(o => o.big) ? ' is-big' : ''}">` + q.opts.map((o, k) => {
+            let cls = 'eng-opt'; if (quiz.sel === k) cls += ' is-sel';
+            if (locked) { if (k === q.ans) cls += ' is-right'; else if (quiz.sel === k) cls += ' is-wrong'; }
+            return `<button type="button" class="${cls}" ${o.ltr ? 'dir="ltr"' : ''} data-act="qChoose" data-k="${k}">${o.big ? `<span class="eng-emo">${esc(o.t)}</span>` : esc(o.t)}</button>`;
+        }).join('') + '</div>';
+    } else {
+        const slots = quiz.placed.length === 0 ? '<span class="eng-hint he" dir="rtl">לחצו על המילים לפי הסדר</span>'
+            : quiz.placed.map((p, k) => `<button type="button" class="eng-tile is-in" ${locked ? 'disabled' : ''} data-act="qUnplace" data-k="${k}">${esc(q.tiles[p])}</button>`).join('');
+        const pool = q.tiles.map((t, k) => quiz.placed.includes(k) ? `<span class="eng-tile is-ghost">${esc(t)}</span>` : `<button type="button" class="eng-tile" ${locked ? 'disabled' : ''} data-act="qPlace" data-k="${k}">${esc(t)}</button>`).join('');
+        body += `<div class="eng-order"><div class="eng-slots en" dir="ltr">${slots}</div><div class="eng-pool en" dir="ltr">${pool}</div>
+            ${quiz.placed.length > 0 && !locked ? '<button type="button" class="eng-link" data-act="qResetTiles">↺ התחלה מחדש</button>' : ''}</div>`;
+    }
+    if (locked) {
+        body += `<div class="eng-fb ${ok ? 'is-ok' : 'is-no'}" role="status"><strong>${ok ? 'נכון!' : 'לא בדיוק.'}</strong>
+            ${!ok ? ` התשובה הנכונה: <span class="en" dir="ltr">${esc(q.fix || '')}</span>` : ''}
+            ${!ok && !retry ? '<span class="eng-note"> השאלה תחזור עוד פעם בסוף.</span>' : ''}
+            ${q.audio && q.kind === 'order' ? speakerBtn(q.audio, undefined, 'שמעו') : ''}</div>`;
+    }
+    const btnLabel = quiz.mode === 'practice' && !quiz.checked && q.kind === 'order' ? 'בדיקה' : locked ? 'המשך' : quiz.mode === 'practice' ? 'בדיקה' : 'הבא';
+    return `<div class="eng-quiz">
+    <div class="eng-quiz-top"><button type="button" class="eng-link" data-act="qExit">← יציאה</button>
+        <span class="eng-count">${quiz.mode === 'placement' ? `שאלה ${step + 1}` : `שאלה ${Math.min(step + 1, total)} מתוך ${total}`}${retry ? ' · עוד ניסיון' : ''}</span></div>
+    <div class="eng-bar" aria-hidden="true"><span style="width:${Math.min(100, (step / total) * 100)}%"></span></div>
+    <p class="eng-prompt">${esc(q.prompt)}</p>${body}
+    <div class="eng-next"><button type="button" class="file-button" data-variant="primary" ${answered ? '' : 'disabled'} data-act="qPress">${btnLabel}</button></div></div>`;
+}
+let quizAudioTimer = null;
+function quizAfterRender() {
+    if (quizAudioTimer) { clearTimeout(quizAudioTimer); quizAudioTimer = null; }
+    const q = quiz.queue[quiz.i];
+    if (quiz.lastAudio === q.id + '.' + quiz.i) return;
+    quiz.lastAudio = q.id + '.' + quiz.i;
+    if (q.audio && q.kind === 'mc' && (q.skill === 'l' || q.stemKind === 'en')) {
+        quizAudioTimer = setTimeout(() => speak(q.audio, q.skill === 'l' && q.audio.includes(' ') ? 0.75 : 0.7), 250);
+    }
+}
+ACT.qSpeak = () => { const q = quiz.queue[quiz.i]; speak(q.audio, q.audio.includes(' ') ? 0.75 : 0.7); };
+ACT.qSpeakSlow = () => { const q = quiz.queue[quiz.i]; speak(q.audio, 0.45); };
+ACT.qChoose = el => { const k = parseInt(el.getAttribute('data-k'), 10); if (quiz.mode === 'practice' && quiz.checked) return; quiz.sel = k; if (quiz.mode === 'practice') quiz.checked = true; render(); };
+ACT.qPlace = el => { const k = parseInt(el.getAttribute('data-k'), 10); quiz.placed.push(k); render(); };
+ACT.qUnplace = el => { const k = parseInt(el.getAttribute('data-k'), 10); quiz.placed = quiz.placed.filter((_, x) => x !== k); render(); };
+ACT.qResetTiles = () => { quiz.placed = []; render(); };
+ACT.qExit = () => { const f = quiz.onExit; const qz = quiz; quiz = null; if (f) f(); else go({ n: 'home' }); };
+ACT.qPress = () => {
+    const q = quiz.queue[quiz.i];
+    const good = q.kind === 'mc' ? quiz.sel === q.ans : quiz.placed.map(p => q.tiles[p]).join(' ') === q.target.join(' ');
+    if (quiz.mode === 'practice' && !quiz.checked) { quiz.checked = true; render(); return; }
+    const retry = q.id.endsWith('#r');
+    let nq = quiz.queue;
+    if (quiz.mode === 'practice') {
+        if (!good && !retry) nq = [...quiz.queue, { ...q, id: q.id + '#r', tiles: q.tiles ? shuffle(q.tiles) : q.tiles }];
+    }
+    const r = { q, ok: !!good, retry };
+    quiz.rs.push(r);
+    if (quiz.onAnswer) quiz.onAnswer(r);
+    const ni = quiz.i + 1;
+    if (ni >= nq.length || (quiz.skipRule && quiz.skipRule(quiz.rs, nq[ni]))) {
+        const done = quiz.onDone; const results = quiz.rs; quiz = null;
+        done(results); return;
+    }
+    quiz.queue = nq; quiz.i = ni; quiz.sel = null; quiz.placed = []; quiz.checked = false;
+    render(); scrollToTop();
+};
+
+// ===== boot =====
+render();
+
+</script>
+<script>
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); }); }
+</script>
+</body>
+</html>
