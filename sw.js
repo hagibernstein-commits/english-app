@@ -1,4 +1,5 @@
-const CACHE = 'english-steps-v2.0.0';
+self.addEventListener('fetch',e=>{if(new URL(e.request.url).pathname==='/family-hub/gatekeeper.js'){e.respondWith(fetch(e.request,{cache:'reload'}));}});
+const CACHE = 'english-steps-v2.0.0-family2';
 const ASSETS = ['./', 'index.html', 'manifest.webmanifest', 'hero.jpg', 'icon-192.png', 'icon-512.png'];
 self.addEventListener('install', e => {
     e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));

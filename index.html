@@ -134,7 +134,8 @@ body { background: var(--ds-page); font-family: system-ui, -apple-system, 'Segoe
 
 </style>
 </head>
-<body>
+<body><div id="family-control-prelock" dir="rtl" style="position:fixed;inset:0;z-index:2147483647;background:#f5f3eb;color:#173c39;display:flex;align-items:center;justify-content:center;padding:30px;text-align:center;font:18px Arial,sans-serif"><div><h2>בודקים את זמן המשחק</h2><p>כדי לשחק צריך חיבור לאינטרנט ומכשיר שצורף על ידי הורה.</p><a style="color:inherit" href="https://hagibernstein-commits.github.io/family-hub/">למרכז המשפחתי</a></div></div>
+
 <div class="eng-shell">
 <div class="eng-topbar"><h1>אנגלית בצעדים קטנים</h1><p>קורס לימוד אנגלית למתחילים, בעברית</p></div>
 <div dir="rtl" class="eng" lang="he"><div id="app-top" aria-hidden="true"></div><div id="app"><p class="eng-note">טוען...</p></div>
@@ -850,6 +851,6 @@ render();
 <script>
 if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); }); }
 </script>
-<script src="https://hagibernstein-commits.github.io/family-hub/gatekeeper.js" data-app="english-app"></script>
+<script src="https://hagibernstein-commits.github.io/family-hub/gatekeeper.js?v=secure2" data-app="english-app"></script>
 </body>
 </html>
